@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.fundamentaandroidnavigations.home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_category"
+            app:destination="@id/category"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/category"
+        android:name="com.example.fundamentaandroidnavigations.Category"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_category_to_detail"
+            app:destination="@id/detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.fundamentaandroidnavigations.Detail"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detail_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/home" />
+    </fragment>
+    <activity
+        android:id="@+id/profile"
+        android:name="com.example.fundamentaandroidnavigations.Profile"
+        android:label="activity_profile"
+        tools:layout="@layout/activity_profile" />
+</navigation>
