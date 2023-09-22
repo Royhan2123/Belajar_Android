@@ -1,0 +1,45 @@
+package com.example.storyapp.api.retrofit
+
+import com.example.storyapp.api.response.*
+import com.example.storyapp.model.LoginModel
+import com.example.storyapp.model.RegisterModel
+
+import retrofit2.*
+import retrofit2.http.Body
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
+
+interface ApiService {
+    @POST("register")
+    suspend fun registerAccount(
+        @Body requestBody: RegisterModel,
+    ): RegisterResponse
+
+    @POST("login")
+    suspend fun loginAccount(
+        @Body requestBody: LoginModel,
+    ): LoginResponse
+
+    @GET("stories")
+    suspend fun getAllStories(@Header("Authorization") token: String): StoryResponse
+
+    @GET("stories/{id}")
+    suspend fun getStoryDetail(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): DetailResponse
+
+    @Multipart
+    @POST("stories")
+     fun uploadStory(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+    ): Call<UploadResponse>
+}
