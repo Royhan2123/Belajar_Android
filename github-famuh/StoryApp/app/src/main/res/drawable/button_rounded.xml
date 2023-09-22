@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="16dp" /> <!-- Atur radius sudut tumpul di sini, misalnya 8dp -->
-    <solid android:color="@color/red" /> <!-- Atur warna latar belakang tombol di sini -->
-</shape>
