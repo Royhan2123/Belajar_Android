@@ -36,7 +36,5 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
                 instance
             }
         }
-        private val THEME_KEY = booleanPreferencesKey("theme_setting")
-
     }
 }
