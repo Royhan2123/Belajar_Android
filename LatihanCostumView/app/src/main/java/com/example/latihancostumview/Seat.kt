@@ -1,3 +1,11 @@
 package com.example.latihancostumview
 
-data class Seat()
+import android.view.View.getDefaultSize
+
+data class Seat(
+    val id: Int,
+    var x: Float? = 0F,
+    var y: Float? = 0F,
+    var name: String,
+    var isBooked: Boolean,
+)
