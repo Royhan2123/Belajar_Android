@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Product Detail</string>
+    <string name="description">Cool limited edition running shoes. Wearing these shoes will improve your understanding when learning to code.\n\nStuff is always there. Various sizes and colors are available. Order now!</string>
+    <string name="belisekarang">Buy Now!</string>
+    <string name="_42">42</string>
+    <string name="_4_5_1_249">4.5 (1,249)</string>
+    <string name="coklat">Brown</string>
+    <string name="tanggal">Uploaded Aug 5, 2021</string>
+    <string name="toko_dicoding">Dicoding Store</string>
+    <string name="sepatu_lari">Running Shoes</string>
+    <string name="harga">$ 13.95</string>
+</resources>

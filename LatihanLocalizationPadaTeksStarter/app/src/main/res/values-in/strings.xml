@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Product Detail</string>
+    <string name="description">Sepatu lari kece edisi terbatas. Memakai sepatu ini akan meningkatkan pemahamanmu ketika belajar coding.\n\nBarang selalu ada. Tersedia berbagai ukuran dan warna. Silakan langsung order!</string>
+    <string name="belisekarang">Beli Sekarang!</string>
+    <string name="_42">42</string>
+    <string name="_4_5_1_249">4.5 (1.249)</string>
+    <string name="coklat">Coklat</string>
+    <string name="tanggal">Diunggah 5 Agu 2021</string>
+    <string name="toko_dicoding">Toko Dicoding</string>
+    <string name="sepatu_lari">Sepatu Lari</string>
+    <string name="harga">Rp. 200.000,00</string>
+</resources>
