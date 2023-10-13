@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LatihanServices"
         tools:targetApi="31">
+
+        <service
+            android:name=".MyBackgroundServices"
+            android:enabled="true"
+            android:exported="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
