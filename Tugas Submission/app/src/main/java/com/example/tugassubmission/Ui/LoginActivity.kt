@@ -20,7 +20,9 @@ import com.example.tugassubmission.ext.gone
 import com.example.tugassubmission.ext.show
 import com.example.tugassubmission.ext.showOKDialog
 import com.example.tugassubmission.ext.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginModel by viewModels()
 

@@ -7,7 +7,9 @@ import com.example.tugassubmission.data.model.Story
 import com.example.tugassubmission.databinding.ActivityDetailBinding
 import com.example.tugassubmission.ext.ConstVal
 import com.example.tugassubmission.ext.setImageUrl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailStoryActivity : AppCompatActivity() {
 
     private var _activityDetailStoryBinding: ActivityDetailBinding? = null

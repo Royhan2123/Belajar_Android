@@ -17,7 +17,9 @@ import com.example.tugassubmission.ext.UiConstValue
 import com.example.tugassubmission.ext.isEmailValid
 import com.example.tugassubmission.ext.showOKDialog
 import com.example.tugassubmission.ext.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private val registerViewModel: RegisterModel by viewModels()
 

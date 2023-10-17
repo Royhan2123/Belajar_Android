@@ -26,6 +26,7 @@ import com.example.tugassubmission.ext.show
 import com.example.tugassubmission.ext.showOKDialog
 import com.example.tugassubmission.ext.showToast
 import com.example.tugassubmission.ext.uriToFile
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -33,6 +34,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
+@AndroidEntryPoint
 class AddStoryActivity : AppCompatActivity() {
     private val storyViewModel: StoryModel by viewModels()
 

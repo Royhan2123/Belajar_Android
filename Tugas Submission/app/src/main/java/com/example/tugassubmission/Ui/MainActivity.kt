@@ -16,8 +16,10 @@ import com.example.tugassubmission.R
 import com.example.tugassubmission.ext.SessionManager
 import com.example.tugassubmission.data.remote.ApiResponse
 import com.example.tugassubmission.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val storyViewModel: StoryModel by viewModels()
 
