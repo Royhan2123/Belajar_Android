@@ -1,13 +1,13 @@
-package com.example.tugassubmission
+package com.example.tugassubmission.ext
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.tugassubmission.ConstVal.KEY_EMAIL
-import com.example.tugassubmission.ConstVal.KEY_IS_LOGIN
-import com.example.tugassubmission.ConstVal.KEY_TOKEN
-import com.example.tugassubmission.ConstVal.KEY_USER_ID
-import com.example.tugassubmission.ConstVal.KEY_USER_NAME
-import com.example.tugassubmission.ConstVal.PREFS_NAME
+import com.example.tugassubmission.ext.ConstVal.KEY_EMAIL
+import com.example.tugassubmission.ext.ConstVal.KEY_IS_LOGIN
+import com.example.tugassubmission.ext.ConstVal.KEY_TOKEN
+import com.example.tugassubmission.ext.ConstVal.KEY_USER_ID
+import com.example.tugassubmission.ext.ConstVal.KEY_USER_NAME
+import com.example.tugassubmission.ext.ConstVal.PREFS_NAME
 
 class SessionManager(context:Context) {
     private var prefs: SharedPreferences =

@@ -1,4 +1,4 @@
-package com.example.tugassubmission
+package com.example.tugassubmission.ext
 
 object ConstVal {
     const val PREFS_NAME = "storyapp.pref"

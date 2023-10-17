@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.tugassubmission.R
-import com.example.tugassubmission.SessionManager
+import com.example.tugassubmission.ext.SessionManager
+import com.example.tugassubmission.ext.UiConstValue
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {

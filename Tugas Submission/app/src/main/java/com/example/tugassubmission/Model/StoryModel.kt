@@ -1,50 +1,41 @@
 package com.example.tugassubmission.Model
 
-import android.app.Activity
-import android.content.Intent
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.tugassubmission.data.remote.ApiResponse
+import com.example.tugassubmission.data.remote.story.AddStoriesResponse
+import com.example.tugassubmission.data.remote.story.GetStoriesResponse
+import com.example.tugassubmission.data.repository.StoryRepository
+import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import javax.inject.Inject
 
-class StoryModel (private val storyList: List<Story>): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryModel  @Inject constructor(private val storyRepository: StoryRepository): ViewModel() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryAdapter.StoryViewHolder {
-        val binding = ItemStoryRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoryViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: StoryAdapter.StoryViewHolder, position: Int) {
-        storyList[position].let { story ->
-            holder.bind(story)
-        }
-    }
-
-    override fun getItemCount(): Int = storyList.size
-
-    inner class StoryViewHolder(private val binding: ItemStoryRowBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(story: Story) {
-            with(binding) {
-                tvStoryTitle.text = story.name
-                tvStoryDesc.text = story.description
-                tvStoryDate.text = story.createdAt.timeStamptoString()
-
-                imgStoryThumbnail.setImageUrl(story.photoUrl, true)
-            }
-            itemView.setOnClickListener {
-                val intent = Intent(it.context, DetailStoryActivity::class.java)
-                intent.putExtra(ConstVal.BUNDLE_KEY_STORY, story)
-
-                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    itemView.context as Activity,
-                    Pair(binding.imgStoryThumbnail, "thumbnail"),
-                    Pair(binding.tvStoryTitle, "title"),
-                    Pair(binding.tvStoryDesc, "description"),
-                )
-                itemView.context.startActivity(intent, optionsCompat.toBundle())
+    fun getAllStories(token: String): LiveData<ApiResponse<GetStoriesResponse>> {
+        val result = MutableLiveData<ApiResponse<GetStoriesResponse>>()
+        viewModelScope.launch {
+            storyRepository.getAllStories(token).collect {
+                result.postValue(it)
             }
         }
+        return result
     }
 
+    fun addNewStory(
+        token: String,
+        file: MultipartBody.Part,
+        description: RequestBody
+    ): LiveData<ApiResponse<AddStoriesResponse>> {
+        val result = MutableLiveData<ApiResponse<AddStoriesResponse>>()
+        viewModelScope.launch {
+            storyRepository.addNewStory(token, file, description).collect {
+                result.postValue(it)
+            }
+        }
+        return result
+    }
 }
