@@ -1,6 +1,6 @@
 package com.example.tugassubmission.data.mapper
-import com.example.tugassubmission.data.model.Story
 import com.example.tugassubmission.data.local.entity.StoryEntity
+import com.example.tugassubmission.data.model.Story
 
 fun storyToStoryEntity(story: Story): StoryEntity {
     return StoryEntity(

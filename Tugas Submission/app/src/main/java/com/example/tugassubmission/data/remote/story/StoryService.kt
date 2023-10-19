@@ -1,6 +1,4 @@
 package com.example.tugassubmission.data.remote.story
-import com.example.tugassubmission.data.remote.story.AddStoriesResponse
-import com.example.tugassubmission.data.remote.story.GetStoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.GET
