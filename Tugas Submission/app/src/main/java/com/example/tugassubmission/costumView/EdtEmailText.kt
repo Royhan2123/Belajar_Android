@@ -8,7 +8,8 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.example.tugassubmission.R
 import com.example.tugassubmission.ext.isEmailValid
 
-class EdtEmailText : AppCompatEditText{
+class StoryEmailEditText : AppCompatEditText {
+
     constructor(context: Context) : super(context) {
         init()
     }

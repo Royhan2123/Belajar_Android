@@ -14,7 +14,7 @@ import com.example.tugassubmission.databinding.ItemStoryRowBinding
 import com.example.tugassubmission.ext.setImageUrl
 import com.example.tugassubmission.ext.timeStamptoString
 
-class StoryAdapter (private val storyList: List<Story>): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter(private val storyList: List<Story>): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryAdapter.StoryViewHolder {
         val binding = ItemStoryRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)

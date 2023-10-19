@@ -10,6 +10,7 @@ import com.example.tugassubmission.databinding.ActivityProfileBinding
 import com.example.tugassubmission.ext.SessionManager
 
 class ProfileActivity : AppCompatActivity() {
+
     private var _activityProfileBinding: ActivityProfileBinding? = null
     private val binding get() = _activityProfileBinding!!
 
@@ -22,6 +23,7 @@ class ProfileActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _activityProfileBinding = ActivityProfileBinding.inflate(layoutInflater)
@@ -65,4 +67,5 @@ class ProfileActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
 }

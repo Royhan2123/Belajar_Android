@@ -7,7 +7,8 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.example.tugassubmission.R
 
-class EdtPasswordText : AppCompatEditText {
+class StoryPasswordEditText : AppCompatEditText {
+
     constructor(context: Context) : super(context) {
         init()
     }

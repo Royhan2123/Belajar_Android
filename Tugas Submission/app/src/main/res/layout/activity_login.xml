@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcomeDesc" />
 
-    <com.example.tugassubmission.costumView.EdtEmailText
+    <com.example.tugassubmission.costumView.StoryEmailEditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtEmail" />
 
-    <com.example.tugassubmission.costumView.EdtPasswordText
+    <com.example.tugassubmission.costumView.StoryPasswordEditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

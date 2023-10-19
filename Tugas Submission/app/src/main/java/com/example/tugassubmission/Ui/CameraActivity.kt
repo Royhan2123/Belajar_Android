@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
+
     private var _activityCameraBinding: ActivityCameraBinding? = null
     private val binding get() = _activityCameraBinding!!
 
@@ -37,6 +38,7 @@ class CameraActivity : AppCompatActivity() {
         initExecutor()
         initAction()
     }
+
     override fun onResume() {
         super.onResume()
         startCamera()

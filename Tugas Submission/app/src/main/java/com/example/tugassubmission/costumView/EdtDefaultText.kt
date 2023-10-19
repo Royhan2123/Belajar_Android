@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.example.tugassubmission.R
 
-class EdtDefaultText : AppCompatEditText {
+class StoryDefaultEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -17,11 +17,7 @@ class EdtDefaultText : AppCompatEditText {
         init()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init()
     }
 

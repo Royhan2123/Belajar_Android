@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
+class LoginViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
 
     fun loginUser(loginBody: LoginBody): LiveData<ApiResponse<AuthResponse>> {
         val result = MutableLiveData<ApiResponse<AuthResponse>>()
@@ -24,4 +24,5 @@ class LoginModel @Inject constructor(private val authRepository: AuthRepository)
         }
         return result
     }
+
 }

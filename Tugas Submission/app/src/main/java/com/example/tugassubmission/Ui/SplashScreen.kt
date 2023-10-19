@@ -10,12 +10,14 @@ import com.example.tugassubmission.ext.SessionManager
 import com.example.tugassubmission.ext.UiConstValue
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreen : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     private lateinit var pref: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
         pref = SessionManager(this)
         val isLogin = pref.isLogin
         Handler(Looper.getMainLooper()).postDelayed({

@@ -14,12 +14,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.tugassubmission.ext.ConstVal.CAMERA_X_RESULT
 import com.example.tugassubmission.ext.ConstVal.KEY_PICTURE
-import com.example.tugassubmission.ext.ConstVal.REQUEST_CODE_PERMISSIONS
-import com.example.tugassubmission.Model.StoryModel
+import com.example.tugassubmission.Model.StoryViewModel
 import com.example.tugassubmission.R
 import com.example.tugassubmission.data.remote.ApiResponse
 import com.example.tugassubmission.ext.SessionManager
 import com.example.tugassubmission.databinding.ActivityAddStoryBinding
+import com.example.tugassubmission.ext.ConstVal.REQUEST_CODE_PERMISSIONS
 import com.example.tugassubmission.ext.gone
 import com.example.tugassubmission.ext.reduceFileImage
 import com.example.tugassubmission.ext.show
@@ -36,7 +36,8 @@ import java.io.File
 
 @AndroidEntryPoint
 class AddStoryActivity : AppCompatActivity() {
-    private val storyViewModel: StoryModel by viewModels()
+
+    private val storyViewModel: StoryViewModel by viewModels()
 
     private var _activityAddStoryBinding: ActivityAddStoryBinding? = null
     private val binding get() = _activityAddStoryBinding!!
@@ -57,7 +58,6 @@ class AddStoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         _activityAddStoryBinding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(_activityAddStoryBinding?.root)
 

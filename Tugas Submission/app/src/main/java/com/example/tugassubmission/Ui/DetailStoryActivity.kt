@@ -9,6 +9,7 @@ import com.example.tugassubmission.ext.ConstVal
 import com.example.tugassubmission.ext.setImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class DetailStoryActivity : AppCompatActivity() {
 
@@ -44,4 +45,5 @@ class DetailStoryActivity : AppCompatActivity() {
         onBackPressed()
         return super.onNavigateUp()
     }
+
 }

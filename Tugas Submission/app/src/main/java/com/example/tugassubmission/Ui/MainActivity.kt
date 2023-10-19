@@ -11,7 +11,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugassubmission.Model.StoryAdapter
-import com.example.tugassubmission.Model.StoryModel
+import com.example.tugassubmission.Model.StoryViewModel
 import com.example.tugassubmission.R
 import com.example.tugassubmission.ext.SessionManager
 import com.example.tugassubmission.data.remote.ApiResponse
@@ -21,7 +21,8 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val storyViewModel: StoryModel by viewModels()
+
+    private val storyViewModel: StoryViewModel by viewModels()
 
     private var _activityMainBinding: ActivityMainBinding? = null
     private val binding get() = _activityMainBinding!!
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -114,4 +116,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

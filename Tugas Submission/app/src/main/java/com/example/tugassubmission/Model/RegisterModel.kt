@@ -14,7 +14,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
+class RegisterViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
 
     fun registerUser(authBody: AuthBody): LiveData<ApiResponse<Response<AuthResponse>>> {
         val result = MutableLiveData<ApiResponse<Response<AuthResponse>>>()

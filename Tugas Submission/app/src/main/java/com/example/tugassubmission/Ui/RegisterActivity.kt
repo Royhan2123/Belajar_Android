@@ -8,7 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.activity.viewModels
-import com.example.tugassubmission.Model.RegisterModel
+import com.example.tugassubmission.Model.RegisterViewModel
 import com.example.tugassubmission.R
 import com.example.tugassubmission.data.remote.ApiResponse
 import com.example.tugassubmission.data.remote.auth.AuthBody
@@ -21,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
-    private val registerViewModel: RegisterModel by viewModels()
+
+    private val registerViewModel: RegisterViewModel by viewModels()
 
     private var _activityRegisterBinding: ActivityRegisterBinding? = null
     private val binding get() = _activityRegisterBinding!!
@@ -35,11 +36,13 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         _activityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(_activityRegisterBinding?.root)
 
         initAction()
     }
+
     private fun initAction() {
         binding.btnRegister.setOnClickListener {
             val userName = binding.edtName.text.toString()

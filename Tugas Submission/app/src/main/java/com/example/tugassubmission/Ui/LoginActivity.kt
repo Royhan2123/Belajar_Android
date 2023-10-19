@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.tugassubmission.Model.LoginModel
+import com.example.tugassubmission.Model.LoginViewModel
 import com.example.tugassubmission.R
 import com.example.tugassubmission.data.remote.ApiResponse
 import com.example.tugassubmission.data.remote.auth.LoginBody
@@ -24,7 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    private val loginViewModel: LoginModel by viewModels()
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private var _activityLoginBinding: ActivityLoginBinding? = null
     private val binding get() = _activityLoginBinding!!
@@ -41,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         _activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(_activityLoginBinding?.root)
 
