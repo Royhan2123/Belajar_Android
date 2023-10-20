@@ -84,17 +84,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun isLoading(loading: Boolean) {
         if (loading) {
-            binding.apply {
-                shimmerLoading.visibility = View.VISIBLE
-                shimmerLoading.startShimmer()
-                rvStories.visibility = View.INVISIBLE
-            }
+            binding.rvStories.visibility = View.GONE
         } else {
-            binding.apply {
-                rvStories.visibility = View.VISIBLE
-                shimmerLoading.stopShimmer()
-                shimmerLoading.visibility = View.INVISIBLE
-            }
+            binding.rvStories.visibility = View.VISIBLE
         }
     }
 
@@ -116,5 +108,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

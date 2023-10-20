@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.example.tugassubmission.R
 
-class StoryDefaultEditText : AppCompatEditText {
+class EdtDefaultText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -23,20 +23,16 @@ class StoryDefaultEditText : AppCompatEditText {
 
     private fun init() {
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // do nothing
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val name = s.toString()
                 when {
-                    name.isBlank() -> error = context.getString(R.string.error_empty_name)
+                    name.isBlank() -> error = context.getString(R.string.Nama_Kosong)
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-                // do nothing
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 }

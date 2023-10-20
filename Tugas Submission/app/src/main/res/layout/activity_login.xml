@@ -15,67 +15,54 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/bg_dim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBlackDim"
-        android:elevation="@dimen/dimen_4dp"
-        android:visibility="gone" />
-
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:src="@drawable/image_dicoding"
         android:layout_marginTop="@dimen/dimen_32dp"
+        tools:alpha="100"
+        android:alpha="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
-
     <TextView
-        android:id="@+id/tvWelcomeTitle"
-        android:text="@string/label_welcome"
+        android:id="@+id/txtloginAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dimen_24sp"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="90dp"
+        android:text="Login Your Account"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"/>
-
-    <TextView
-        android:id="@+id/tvWelcomeDesc"
-        android:text="@string/label_login_welcome_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_8dp"
-        android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:textSize="@dimen/dimen_16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
     <TextView
         android:id="@+id/tvEmailTitle"
+        style="@style/StoryTextContent.EditTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
+        tools:alpha="100"
+        android:alpha="0"
         android:layout_marginTop="@dimen/dimen_32dp"
-        android:text="@string/label_email"
+        android:text="@string/Email"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/txtloginAccount" />
 
-    <com.example.tugassubmission.costumView.StoryEmailEditText
+    <com.example.tugassubmission.costumView.EdtEmailText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/edt_style"
         android:inputType="textEmailAddress"
         android:padding="@dimen/dimen_16dp"
+        tools:alpha="100"
+        android:alpha="0"
         android:translationZ="0dp"
         app:layout_constraintTop_toBottomOf="@id/tvEmailTitle"
         tools:ignore="SpeakableTextPresentCheck"
@@ -83,21 +70,26 @@
 
     <TextView
         android:id="@+id/tvPasswordTitle"
+        style="@style/StoryTextContent.EditTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:text="@string/label_password"
+        android:text="@string/Password"
+        tools:alpha="100"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtEmail" />
 
-    <com.example.tugassubmission.costumView.StoryPasswordEditText
+    <com.example.tugassubmission.costumView.EdtPasswordText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_8dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/edt_style"
+        tools:alpha="100"
+        android:alpha="0"
         android:inputType="textPassword"
         android:padding="@dimen/dimen_16dp"
         android:translationZ="0dp"
@@ -107,12 +99,14 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:text="@string/action_login"
+        android:text="@string/Masuk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16dp"
         android:background="@drawable/bg_button"
         app:backgroundTint="@null"
+        tools:alpha="100"
+        android:alpha="0"
         android:translationZ="0dp"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
@@ -121,6 +115,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        tools:alpha="100"
+        android:alpha="0"
         android:layout_marginTop="@dimen/dimen_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,16 +125,20 @@
         <TextView
             android:id="@+id/tvIsHaventAccount"
             android:layout_width="wrap_content"
+            tools:alpha="100"
+            android:alpha="0"
             android:layout_height="wrap_content"
-            android:text="@string/label_is_havent_account"/>
+            android:text="@string/dont_have_account"/>
 
         <TextView
             android:id="@+id/tvToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4dp"
+            tools:alpha="100"
+            android:alpha="0"
             android:text="@string/action_to_register"
-            android:textColor="@color/colorLightGreen"
+            android:textColor="#5E88B6"
             android:textStyle="bold"
             tools:ignore="TextContrastCheck" />
 

@@ -2,17 +2,16 @@
     <string name="app_name">Tugas Submission</string>
     <string name="action_register">Register</string>
 
-    <string name="title_dialog_error">Oops something wrong</string>
-    <string name="error_empty_name">Please insert your name</string>
-    <string name="error_empty_email">Please insert your email</string>
-    <string name="error_invalid_email">The email is invalid</string>
-    <string name="error_empty_password">Please insert your password</string>
-    <string name="label_is_havent_account">Don\'t have account ?</string>
+    <string name="Kesalahan">Oops something wrong</string>
+    <string name="Nama_Kosong">Please insert your name</string>
+    <string name="EmailKosong">Please insert your email</string>
+    <string name="Email_Salah">The email is invalid</string>
+    <string name="PasswordKosong">Please insert your password</string>
     <string name="label_is_have_account">Already have account ?</string>
-    <string name="login">Login</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="welcome">Hello, Story Writer</string>
+    <string name="Masuk">Login</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="label_welcome">Hello, Story Writer</string>
     <string name="label_login_welcome_desc">Please login so you can enjoy the full experience</string>
     <string name="action_to_register">Register here</string>
     <string name="label_register_welcome_desc">Register yourself to be a Story Writer</string>
@@ -41,10 +40,11 @@
     <string name="empty_text">No Data</string>
     <string name="app_widget_description">Story App Image Banner Widget</string>
     <string name="title_profile">Profile</string>
-    <string name="error_password_more_6">Password must more than 6 character</string>
+    <string name="error_password_more_6">Password must more than 8 character</string>
     <string name="label_nama">Name</string>
     <string name="title_message">Information</string>
     <string name="message_register_success">Register Success</string>
     <string name="message_pick_image">Pick an image</string>
     <string name="error_desc_empty">Description can\'t empty</string>
+    <string name="dont_have_account">Dont Have Account?</string>
 </resources>

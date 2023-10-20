@@ -3,16 +3,15 @@
     <string name="app_name">Tugas Submission</string>
     <string name="action_register">Daftar</string>
 
-    <string name="title_dialog_error">Oops ada kesalahan</string>
-    <string name="error_empty_name">Nama Tidak Boleh Kosong</string>
-    <string name="error_empty_email">Email tidak boleh kosong!</string>
-    <string name="error_invalid_email">Email tidak valid!</string>
-    <string name="error_empty_password">Password tidak boleh kosong!</string>
-    <string name="label_is_havent_account">Belum punya akun ?</string>
+    <string name="Kesalahan">Oops ada kesalahan</string>
+    <string name="Nama_Kosong">Nama Tidak Boleh Kosong</string>
+    <string name="EmailKosong">Email tidak boleh kosong!</string>
+    <string name="Email_Salah">Email tidak valid!</string>
+    <string name="PasswordKosong">Password tidak boleh kosong!</string>
     <string name="label_is_have_account">Sudah punya akun ?</string>
-    <string name="action_login">Masuk</string>
-    <string name="label_email">Email</string>
-    <string name="label_password">Password</string>
+    <string name="Masuk">Masuk</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
     <string name="label_welcome">Halo Story Writer</string>
     <string name="label_login_welcome_desc">Silahkan login ke akun kamu supaya dapat fitur yang lengkap</string>
     <string name="action_to_register">Daftar Disini</string>
@@ -42,10 +41,12 @@
     <string name="empty_text">Tidak ada data</string>
     <string name="app_widget_description">Story App Image Banner Widget</string>
     <string name="title_profile">Profil</string>
-    <string name="error_password_more_6">Password harus lebih dari 6 karakter</string>
+    <string name="error_password_more_6">Password harus lebih dari 8 karakter</string>
     <string name="label_nama">Nama</string>
     <string name="title_message">Informasi</string>
     <string name="message_register_success">Register Berhasil</string>
     <string name="message_pick_image">Pilih gambar</string>
     <string name="error_desc_empty">Deskripsi tidak boleh kosong</string>
+    <string name="dont_have_account">Tidak Mempunyai Akun?</string>
+
 </resources>

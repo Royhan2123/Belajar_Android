@@ -12,52 +12,45 @@
         android:layout_height="50dp"
         android:src="@drawable/image_dicoding"
         android:layout_marginTop="@dimen/dimen_32dp"
+        tools:alpha="100"
+        android:alpha="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/tvWelcomeTitle"
-        android:text="@string/label_welcome"
+        android:id="@+id/txtCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dimen_24sp"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:layout_marginTop="@dimen/dimen_32dp"
-        style="@style/StoryTextContent.Title"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="90dp"
+        android:text="Create Your Account"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"/>
-
-    <TextView
-        android:id="@+id/tvWelcomeDesc"
-        android:text="@string/label_register_welcome_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_8dp"
-        android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:textSize="@dimen/dimen_16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
     <TextView
         android:id="@+id/tvNameTitle"
-        style="@style/StoryTextContent.EditTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
+        tools:alpha="100"
+        android:alpha="0"
         android:layout_marginTop="@dimen/dimen_32dp"
         android:text="@string/label_nama"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCreateAccount" />
 
-    <com.example.tugassubmission.costumView.StoryDefaultEditText
+    <com.example.tugassubmission.costumView.EdtDefaultText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/edt_style"
+        tools:alpha="100"
+        android:alpha="0"
         android:maxLines="1"
         android:padding="@dimen/dimen_16dp"
         app:layout_constraintTop_toBottomOf="@id/tvNameTitle"
@@ -66,22 +59,25 @@
 
     <TextView
         android:id="@+id/tvEmailTitle"
-        style="@style/StoryTextContent.EditTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:text="@string/label_email"
+        android:text="@string/Email"
+        tools:alpha="100"
+        android:alpha="0"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtName" />
 
-    <com.example.tugassubmission.costumView.StoryEmailEditText
+    <com.example.tugassubmission.costumView.EdtEmailText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/edt_style"
+        tools:alpha="100"
+        android:alpha="0"
         android:inputType="textEmailAddress"
         android:padding="@dimen/dimen_16dp"
         app:layout_constraintTop_toBottomOf="@id/tvEmailTitle"
@@ -90,22 +86,25 @@
 
     <TextView
         android:id="@+id/tvPasswordTitle"
-        style="@style/StoryTextContent.EditTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:alpha="100"
+        android:alpha="0"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:text="@string/label_password"
+        android:text="@string/Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtEmail" />
 
-    <com.example.tugassubmission.costumView.StoryPasswordEditText
+    <com.example.tugassubmission.costumView.EdtPasswordText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_8dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/edt_style"
+        tools:alpha="100"
+        android:alpha="0"
         android:inputType="textPassword"
         android:padding="@dimen/dimen_16dp"
         app:layout_constraintTop_toBottomOf="@id/tvPasswordTitle"
@@ -120,6 +119,8 @@
         android:layout_margin="@dimen/dimen_16dp"
         android:background="@drawable/bg_button"
         app:backgroundTint="@null"
+        tools:alpha="100"
+        android:alpha="0"
         android:translationZ="0dp"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword"
         tools:ignore="VisualLintButtonSize" />
@@ -128,6 +129,8 @@
         android:id="@+id/layoutTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:alpha="100"
+        android:alpha="0"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/dimen_16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,6 +140,8 @@
         <TextView
             android:id="@+id/tvIsHaveAccount"
             android:layout_width="wrap_content"
+            tools:alpha="100"
+            android:alpha="0"
             android:layout_height="wrap_content"
             android:text="@string/label_is_have_account"/>
 
@@ -146,20 +151,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4dp"
             android:text="@string/action_to_login"
-            android:textColor="@color/colorLightGreen"
-            android:textStyle="bold"
+            android:textColor="#5E88B6"
+            tools:alpha="100"
+            android:alpha="0"
             tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/bg_dim"
-        android:visibility="gone"
-        android:background="@color/colorBlackDim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="@dimen/dimen_2dp"/>
-
     <ProgressBar
         android:id="@+id/progress_bar"
         android:visibility="invisible"

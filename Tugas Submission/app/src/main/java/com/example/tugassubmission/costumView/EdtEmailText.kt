@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.example.tugassubmission.R
 import com.example.tugassubmission.ext.isEmailValid
 
-class StoryEmailEditText : AppCompatEditText {
+class EdtEmailText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -18,27 +18,27 @@ class StoryEmailEditText : AppCompatEditText {
         init()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init()
     }
 
     private fun init() {
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // do nothing
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val email = s.toString()
                 when {
-                    email.isBlank() -> error = context.getString(R.string.error_empty_email)
-                    !email.isEmailValid() -> error = context.getString(R.string.error_invalid_email)
+                    email.isBlank() -> error = context.getString(R.string.EmailKosong)
+                    !email.isEmailValid() -> error = context.getString(R.string.Email_Salah)
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-                // do nothing
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 }

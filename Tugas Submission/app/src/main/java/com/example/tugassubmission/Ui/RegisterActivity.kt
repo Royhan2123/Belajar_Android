@@ -1,5 +1,8 @@
 package com.example.tugassubmission.Ui
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,7 +45,65 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(_activityRegisterBinding?.root)
 
         initAction()
+        playAnimation()
     }
+
+    @SuppressLint("Recycle")
+    private fun playAnimation(){
+        // Set visibility
+        binding.imgLogo.visibility = View.VISIBLE
+        binding.txtCreateAccount.visibility = View.VISIBLE
+        binding.tvNameTitle.visibility = View.VISIBLE
+        binding.edtName.visibility = View.VISIBLE
+        binding.tvEmailTitle.visibility = View.VISIBLE
+        binding.edtEmail.visibility = View.VISIBLE
+        binding.tvPasswordTitle.visibility = View.VISIBLE
+        binding.edtPassword.visibility = View.VISIBLE
+        binding.btnRegister.visibility = View.VISIBLE
+        binding.layoutTextRegister.visibility = View.VISIBLE
+        binding.tvIsHaveAccount.visibility = View.VISIBLE
+        binding.tvToLogin.visibility = View.VISIBLE
+
+
+        binding.imgLogo.alpha = 0f
+        binding.tvNameTitle.alpha = 0f
+        binding.txtCreateAccount.alpha = 0f
+        binding.edtName.alpha = 0f
+        binding.tvEmailTitle.alpha = 0f
+        binding.edtEmail.alpha = 0f
+        binding.tvPasswordTitle.alpha = 0f
+        binding.edtPassword.alpha = 0f
+        binding.btnRegister.alpha = 0f
+        binding.layoutTextRegister.alpha = 0f
+        binding.tvIsHaveAccount.alpha = 0f
+        binding.tvToLogin.alpha = 0f
+
+        // Create animator set
+        val animatorSet = AnimatorSet()
+        ObjectAnimator.ofFloat(binding.imgLogo, View.TRANSLATION_X,-50f,50f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+        animatorSet.playSequentially(
+            ObjectAnimator.ofFloat(binding.imgLogo, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.txtCreateAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvNameTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtName, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvEmailTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvPasswordTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.layoutTextRegister, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvIsHaveAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvToLogin, View.ALPHA, 1f).setDuration(500),
+        )
+        // Start animation
+        animatorSet.start()
+    }
+
+
 
     private fun initAction() {
         binding.btnRegister.setOnClickListener {
@@ -51,10 +113,10 @@ class RegisterActivity : AppCompatActivity() {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 when {
-                    userName.isBlank() -> binding.edtName.error = getString(R.string.error_empty_name)
-                    userEmail.isBlank() -> binding.edtEmail.error = getString(R.string.error_empty_email)
-                    !userEmail.isEmailValid() -> binding.edtEmail.error = getString(R.string.error_invalid_email)
-                    userPassword.isBlank() -> binding.edtPassword.error = getString(R.string.error_empty_password)
+                    userName.isBlank() -> binding.edtName.error = getString(R.string.Nama_Kosong)
+                    userEmail.isBlank() -> binding.edtEmail.error = getString(R.string.EmailKosong)
+                    !userEmail.isEmailValid() -> binding.edtEmail.error = getString(R.string.Email_Salah)
+                    userPassword.isBlank() -> binding.edtPassword.error = getString(R.string.PasswordKosong)
                     else -> {
                         val request = AuthBody(
                             userName, userEmail, userPassword
@@ -86,7 +148,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 is ApiResponse.Error -> {
                     showLoading(false)
-                    showOKDialog(getString(R.string.title_dialog_error), response.errorMessage)
+                    showOKDialog(getString(R.string.Kesalahan), response.errorMessage)
                 }
                 else -> {
                     showToast(getString(R.string.message_unknown_state))
@@ -97,7 +159,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.bgDim.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.edtName.isClickable = !isLoading
         binding.edtName.isEnabled = !isLoading
         binding.edtEmail.isClickable = !isLoading

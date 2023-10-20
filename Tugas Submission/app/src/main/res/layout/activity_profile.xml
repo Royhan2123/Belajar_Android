@@ -22,7 +22,6 @@
         android:textSize="@dimen/dimen_24sp"
         android:layout_marginStart="@dimen/dimen_16dp"
         tools:text="User Name"
-        style="@style/StoryTextContent.Title"
         app:layout_constraintStart_toEndOf="@id/imgProfile"
         app:layout_constraintTop_toTopOf="@id/imgProfile"/>
 
