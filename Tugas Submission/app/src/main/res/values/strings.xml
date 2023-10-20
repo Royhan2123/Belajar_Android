@@ -9,10 +9,10 @@
     <string name="error_empty_password">Please insert your password</string>
     <string name="label_is_havent_account">Don\'t have account ?</string>
     <string name="label_is_have_account">Already have account ?</string>
-    <string name="action_login">Login</string>
-    <string name="label_email">Email</string>
-    <string name="label_password">Password</string>
-    <string name="label_welcome">Hello, Story Writer</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="welcome">Hello, Story Writer</string>
     <string name="label_login_welcome_desc">Please login so you can enjoy the full experience</string>
     <string name="action_to_register">Register here</string>
     <string name="label_register_welcome_desc">Register yourself to be a Story Writer</string>
