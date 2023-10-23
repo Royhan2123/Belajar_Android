@@ -3,9 +3,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.story.api.StoryRepository
 import java.io.File
 import com.example.story.api.*
+import com.example.submissiondicoding.api.StoryRepository
 import kotlinx.coroutines.launch
 
 
@@ -19,7 +19,7 @@ class MainViewModel(private val storyRepository: StoryRepository) : ViewModel() 
 
     fun uploadStory(token: String, description: String, photo: File) {
         viewModelScope.launch {
-            Result.Loading
+            com.example.submissiondicoding.api.Result.Loading
             try {
                 val result = storyRepository.uploadStory(token, description, photo)
                 _uploadResult.value = Result.Success(result)

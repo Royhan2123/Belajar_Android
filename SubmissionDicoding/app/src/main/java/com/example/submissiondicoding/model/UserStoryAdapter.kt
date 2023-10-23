@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.story.R
-import com.example.story.UI.detail.DetailActivity
 import com.example.story.api.response.StoryItem
-import com.example.story.databinding.StoryItemBinding
+import com.example.submissiondicoding.Detail
+import com.example.submissiondicoding.R
+import com.example.submissiondicoding.databinding.StoryItemBinding
 
 
 class UserStoryAdapter :
@@ -41,8 +41,8 @@ class UserStoryAdapter :
 
         // to detail
         holder.binding.cardView.setOnClickListener {
-            val intent = Intent(it.context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_ID, userStory.id)
+            val intent = Intent(it.context, Detail::class.java)
+            intent.putExtra(Detail.EXTRA_ID, userStory.id)
             holder.itemView.context.startActivity(intent)
         }
     }
@@ -53,7 +53,7 @@ class UserStoryAdapter :
             binding.tvItemName.text = userStory.name
             Glide.with(itemView.context)
                 .load(userStory.photoUrl)
-                .error(R.drawable.ic_baseline_broken_image_24)
+                .error(R.drawable.baseline_broken_image_24)
                 .centerCrop()
                 .into(binding.ivItemPhoto)
         }

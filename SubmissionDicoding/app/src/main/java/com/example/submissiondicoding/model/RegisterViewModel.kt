@@ -1,7 +1,7 @@
 package com.example.submissiondicoding.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.story.api.StoryRepository
+import com.example.submissiondicoding.api.StoryRepository
 import kotlinx.coroutines.launch
 
 
