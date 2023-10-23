@@ -4,10 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.story.preferences.UserPreference
-import com.example.story.api.Result
-import com.example.story.api.StoryRepository
 import com.example.story.api.response.LoginResponse
+import com.example.submissiondicoding.api.StoryRepository
+import com.example.submissiondicoding.preferences.UserPreference
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: StoryRepository, private val userPreference: UserPreference) : ViewModel() {
@@ -23,12 +22,12 @@ class LoginViewModel(private val repository: StoryRepository, private val userPr
     }
     fun loginAccount(email: String, password: String) {
         viewModelScope.launch {
-            Result.Loading
+            com.example.submissiondicoding.api.Result.Loading
             try {
                 val result = repository.loginAccount(email, password)
-                _loginResult.value = Result.Success(result)
+                _loginResult.value = com.example.submissiondicoding.api.Result.Success(result)
             } catch (e: Exception) {
-                _loginResult.value = Result.Error(e.message ?: "Failed to upload story")
+                _loginResult.value = com.example.submissiondicoding.api.Result.Error(e.message ?: "Failed to upload story")
             }
         }
     }

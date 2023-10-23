@@ -2,6 +2,9 @@ package com.example.submissiondicoding.api
 import androidx.lifecycle.*
 import com.example.story.api.response.*
 import com.example.submissiondicoding.api.retrofit.ApiService
+import com.example.submissiondicoding.model.LoginModel
+import com.example.submissiondicoding.model.RegisterModel
+import com.example.submissiondicoding.preferences.UserPreference
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
