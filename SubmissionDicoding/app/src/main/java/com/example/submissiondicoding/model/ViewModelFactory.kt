@@ -1,12 +1,8 @@
-
+package com.example.submissiondicoding.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.story.UI.main.MainViewModel
-import com.example.story.UI.main.LogoutViewModel
 import com.example.story.api.StoryRepository
-import com.example.story.UI.authentication.login.LoginViewModel
 import com.example.story.preferences.UserPreference
-import com.example.story.UI.authentication.register.SignupViewModel
 
 class ViewModelFactory(private val repository: StoryRepository, private val pref: UserPreference) :
     ViewModelProvider.Factory {

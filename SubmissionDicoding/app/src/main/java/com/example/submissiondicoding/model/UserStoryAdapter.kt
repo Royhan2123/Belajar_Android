@@ -1,4 +1,4 @@
-
+package com.example.submissiondicoding.model
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
