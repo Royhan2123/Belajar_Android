@@ -1,8 +1,8 @@
 package com.example.submissiondicoding.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.story.api.StoryRepository
-import com.example.story.preferences.UserPreference
+import com.example.submissiondicoding.api.StoryRepository
+import com.example.submissiondicoding.preferences.UserPreference
 
 class ViewModelFactory(private val repository: StoryRepository, private val pref: UserPreference) :
     ViewModelProvider.Factory {

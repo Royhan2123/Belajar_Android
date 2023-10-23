@@ -20,6 +20,7 @@ import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.UserStoryAdapter
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
+import com.example.submissiondicoding.api.Result
 import kotlinx.coroutines.launch
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")

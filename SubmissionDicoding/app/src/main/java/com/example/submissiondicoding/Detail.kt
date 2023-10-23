@@ -13,6 +13,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.submissiondicoding.api.Result
 import com.example.submissiondicoding.databinding.ActivityDetailBinding
 import com.example.submissiondicoding.di.Injection
 import com.example.submissiondicoding.model.LoginViewModel

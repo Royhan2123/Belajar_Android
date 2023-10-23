@@ -8,6 +8,8 @@ import com.example.story.api.response.LoginResponse
 import com.example.submissiondicoding.api.StoryRepository
 import com.example.submissiondicoding.preferences.UserPreference
 import kotlinx.coroutines.launch
+import com.example.submissiondicoding.api.Result
+
 
 class LoginViewModel(private val repository: StoryRepository, private val userPreference: UserPreference) : ViewModel() {
     private var _loginResult = MutableLiveData<Result<LoginResponse>>()

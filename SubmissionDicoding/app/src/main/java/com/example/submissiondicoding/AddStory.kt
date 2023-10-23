@@ -24,6 +24,7 @@ import com.example.submissiondicoding.model.LoginViewModel
 import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
+import com.example.submissiondicoding.api.Result
 import java.io.File
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
