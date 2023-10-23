@@ -1,5 +1,7 @@
 package com.example.submissiondicoding.api.retrofit
 import com.example.story.api.response.*
+import com.example.submissiondicoding.model.LoginModel
+import com.example.submissiondicoding.model.RegisterModel
 
 import retrofit2.*
 import retrofit2.http.Body
