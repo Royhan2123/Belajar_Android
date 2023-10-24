@@ -51,12 +51,12 @@ class UserStoryAdapter :
     class UserStoryViewHolder(val binding: StoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userStory: StoryItem) {
-            binding.tvItemName.text = userStory.name
+            binding.itemName.text = userStory.name
             Glide.with(itemView.context)
                 .load(userStory.photoUrl)
                 .error(R.drawable.baseline_broken_image_24)
                 .centerCrop()
-                .into(binding.ivItemPhoto)
+                .into(binding.itemPhoto)
         }
     }
 }

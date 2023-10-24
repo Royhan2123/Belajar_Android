@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.logout.setOnClickListener {
+        binding.imgLogout.setOnClickListener {
             lifecycleScope.launch {
                 mainViewModel.logout()
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
@@ -81,24 +81,24 @@ class MainActivity : AppCompatActivity() {
     private fun setupAdapterAndList() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.rvStory.layoutManager = layoutManager
-        binding.rvStory.adapter = userStoryAdapter
+        binding.recycleView.layoutManager = layoutManager
+        binding.recycleView.adapter = userStoryAdapter
 
         loginViewModel.readToken().observe(this) { token ->
             storyViewModel.getStory(token).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progresBar.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progresBar.visibility = View.GONE
                         val storyData = result.data
                         userStoryAdapter.submitList(storyData)
 
                         layoutManager.scrollToPosition(0)
                     }
                     is Result.Error -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progresBar.visibility = View.GONE
                         Toast.makeText(
                             this@MainActivity,
                             "An Error Occurred: ${result.err}",

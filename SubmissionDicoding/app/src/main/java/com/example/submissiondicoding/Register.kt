@@ -21,8 +21,8 @@ import com.example.submissiondicoding.model.SignupViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
 
+// Ubah nama variabel binding
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
 
 class Register : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -38,59 +38,39 @@ class Register : AppCompatActivity() {
     }
 
     @SuppressLint("Recycle")
-    private fun playAnimation(){
+    private fun playAnimation() {
         // Set visibility
-        binding.imgLogo.visibility = View.VISIBLE
-        binding.txtCreateAccount.visibility = View.VISIBLE
-        binding.tvNameTitle.visibility = View.VISIBLE
-        binding.edtName.visibility = View.VISIBLE
-        binding.tvEmailTitle.visibility = View.VISIBLE
-        binding.edtEmail.visibility = View.VISIBLE
-        binding.tvPasswordTitle.visibility = View.VISIBLE
-        binding.edtPassword.visibility = View.VISIBLE
-        binding.btnRegister.visibility = View.VISIBLE
-        binding.layoutTextRegister.visibility = View.VISIBLE
-        binding.tvIsHaveAccount.visibility = View.VISIBLE
-        binding.tvToLogin.visibility = View.VISIBLE
+        val viewsToAnimate = arrayOf(
+            binding.imgLogo, binding.txtCreateAccount, binding.tvNameTitle,
+            binding.edtName, binding.tvEmailTitle, binding.edtEmail,
+            binding.tvPasswordTitle, binding.edtPassword, binding.btnRegister,
+            binding.layoutTextRegister, binding.tvIsHaveAccount, binding.tvToLogin
+        )
 
-
-        binding.imgLogo.alpha = 0f
-        binding.tvNameTitle.alpha = 0f
-        binding.txtCreateAccount.alpha = 0f
-        binding.edtName.alpha = 0f
-        binding.tvEmailTitle.alpha = 0f
-        binding.edtEmail.alpha = 0f
-        binding.tvPasswordTitle.alpha = 0f
-        binding.edtPassword.alpha = 0f
-        binding.btnRegister.alpha = 0f
-        binding.layoutTextRegister.alpha = 0f
-        binding.tvIsHaveAccount.alpha = 0f
-        binding.tvToLogin.alpha = 0f
+        for (view in viewsToAnimate) {
+            view.visibility = View.VISIBLE
+            view.alpha = 0f
+        }
 
         // Create animator set
         val animatorSet = AnimatorSet()
-        ObjectAnimator.ofFloat(binding.imgLogo, View.TRANSLATION_X,-50f,50f).apply {
+        ObjectAnimator.ofFloat(binding.imgLogo, View.TRANSLATION_X, -50f, 50f).apply {
             duration = 6000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
-        animatorSet.playSequentially(
-            ObjectAnimator.ofFloat(binding.imgLogo, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.txtCreateAccount, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.tvNameTitle, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.edtName, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.tvEmailTitle, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.tvPasswordTitle, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.layoutTextRegister, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.tvIsHaveAccount, View.ALPHA, 1f).setDuration(500),
-            ObjectAnimator.ofFloat(binding.tvToLogin, View.ALPHA, 1f).setDuration(500),
-        )
+        val duration = 500L
+
+        // Play animations sequentially
+        val animators = viewsToAnimate.map {
+            ObjectAnimator.ofFloat(it, View.ALPHA, 1f).setDuration(duration)
+        }
+        animatorSet.playSequentially(*animators.toTypedArray())
+
         // Start animation
         animatorSet.start()
     }
+
     private fun setupView() {
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -111,15 +91,15 @@ class Register : AppCompatActivity() {
             val password = binding.edtPassword.text.toString()
             when {
                 name.isEmpty() -> {
-                    binding.nameEditTextLayout.error = "Please input your name"
+                    binding.edtName.error = "Please input your name"
                 }
 
                 email.isEmpty() -> {
-                    binding.emailEditTextLayout.error = "Please input your email"
+                    binding.edtEmail.error = "Please input your email"
                 }
 
                 password.isEmpty() -> {
-                    binding.passwordEditTextLayout.error = "Please input your password"
+                    binding.edtPassword.error = "Please input your password"
                 }
 
                 else -> {
@@ -128,11 +108,12 @@ class Register : AppCompatActivity() {
                     val factory = ViewModelFactory(repository, userPreference)
                     val signupViewModel: SignupViewModel by viewModels { factory }
                     signupViewModel.registerAccount(name, email, password)
-                    startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
         }
+        binding.tvToLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-
 }

@@ -1,10 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <corners
-        android:radius="16dp"/>
-
-    <solid
-        android:color="#061280"/>
-
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="16dp" />
+            <solid android:color="#1592D5" /> <!-- Warna saat tombol ditekan -->
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape>
+            <corners android:radius="16dp" />
+            <solid android:color="#061280" /> <!-- Warna normal tombol -->
+        </shape>
+    </item>
+</selector>

@@ -84,9 +84,9 @@ class DetailActivity : AppCompatActivity() {
                             .load(storyData.photoUrl)
                             .error(R.drawable.baseline_broken_image_24)
                             .centerCrop()
-                            .into(binding.ivDetailPhoto)
-                        binding.tvDetailName.text = storyData.name
-                        binding.tvDetailDescription.text = storyData.description
+                            .into(binding.imgDetail)
+                        binding.txtName.text = storyData.name
+                        binding.txtDesc.text = storyData.description
                     }
                     is Result.Error -> {
                         binding.progressBar.visibility = View.GONE
