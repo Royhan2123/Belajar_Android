@@ -23,7 +23,8 @@ import com.example.submissiondicoding.preferences.UserPreference
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class DetailActivity : AppCompatActivity() {
+@Suppress("DEPRECATION")
+class Detail : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var storyViewModel: MainViewModel
@@ -44,7 +45,7 @@ class DetailActivity : AppCompatActivity() {
         if (!id.isNullOrEmpty()) {
             setupEvent(id)
         } else {
-            Toast.makeText(this@DetailActivity, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@Detail, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -95,7 +96,7 @@ class DetailActivity : AppCompatActivity() {
                         is Result.Error -> {
                             binding.progressBar.visibility = View.GONE
                             Toast.makeText(
-                                this@DetailActivity,
+                                this@Detail,
                                 "Terjadi Kesalahan: ${result.err}",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -103,7 +104,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this@DetailActivity, "Token is empty!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Detail, "Token is empty!", Toast.LENGTH_SHORT).show()
             }
         }
     }

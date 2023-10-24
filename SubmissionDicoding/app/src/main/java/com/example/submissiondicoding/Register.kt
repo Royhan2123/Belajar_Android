@@ -112,7 +112,7 @@ class Register : AppCompatActivity() {
             }
         }
         binding.tvToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }

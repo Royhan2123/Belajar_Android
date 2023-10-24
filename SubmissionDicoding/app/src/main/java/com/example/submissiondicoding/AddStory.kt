@@ -1,5 +1,4 @@
 package com.example.submissiondicoding
-
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -12,6 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -26,16 +26,20 @@ import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
 import java.io.File
 
+
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class AddStory : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var storyViewModel: MainViewModel
     private lateinit var loginViewModel: LoginViewModel
+
+
     private var getFile: File? = null
 
     companion object {
         const val CAMERA_X_RESULT = 200
+
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -66,10 +70,22 @@ class AddStory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // checking permission
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+
         supportActionBar?.title = "New Story"
+
         setupViewModel()
         setupAction()
     }
+
 
     private fun setupViewModel() {
         val userPref = UserPreference.getInstance(dataStore)
@@ -77,6 +93,7 @@ class AddStory : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory(repository, userPref)
         loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
         storyViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
     }
 
     private fun setupAction() {
@@ -89,43 +106,64 @@ class AddStory : AppCompatActivity() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val description = binding.edtDesc.text.toString()
+
+            // show error in description is empty
             if (description.isEmpty()) {
-                binding.edtDesc.error = "Description cannot be empty!"
-            } else {
-                loginViewModel.readToken().observe(this) { token ->
-                    if (token.isNotEmpty()) {
-                        storyViewModel.uploadStory(token, description, file)
-                        storyViewModel.uploadResult.observe(this) { result ->
-                            when (result) {
-                                is Result.Loading -> {
-                                    binding.progressBar.visibility = View.VISIBLE
-                                }
-                                is Result.Success -> {
-                                    binding.progressBar.visibility = View.INVISIBLE
-                                    Toast.makeText(this@AddStory, "Success upload story", Toast.LENGTH_SHORT).show()
-                                    finish()
-                                }
-                                is Result.Error -> {
-                                    Toast.makeText(this@AddStory, "Fail upload story", Toast.LENGTH_SHORT).show()
-                                }
-                            }
+                binding.edtDesc.error = "Description cannot be empty !"
+            }
+
+            // Upload Event
+            loginViewModel.readToken().observe(this) { token ->
+
+                // check if null
+                if (token.isNotEmpty() && description.isNotEmpty()){
+                    storyViewModel.uploadStory(token, description, file)
+                } else {
+                    Toast.makeText(this@AddStory, "Description cannot be empty !", Toast.LENGTH_SHORT).show()
+                }
+
+                storyViewModel.uploadResult.observe(this) { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
                         }
-                    } else {
-                        Toast.makeText(this@AddStory, "Token is empty!", Toast.LENGTH_SHORT).show()
+                        is Result.Success -> {
+                            binding.progressBar.visibility = View.INVISIBLE
+                            Toast.makeText(
+                                this@AddStory,
+                                "Success upload story",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(
+                                this@AddStory,
+                                "Fail upload story",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
+
         } else {
-            Toast.makeText(this@AddStory, "Image cannot be empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@AddStory,
+                "Image cannot be empty",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
+
+    // Gallery
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            val selectedImg = result?.data?.data as Uri
-            selectedImg.let { uri ->
+            val selectemImg = result?.data?.data as Uri
+            selectemImg.let { uri ->
                 val myFile = uriToFile(uri, this@AddStory)
                 getFile = myFile
                 binding.previewImageView.setImageURI(uri)
@@ -141,6 +179,7 @@ class AddStory : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
+    // Camera X
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -163,7 +202,8 @@ class AddStory : AppCompatActivity() {
     }
 
     private fun startCameraX() {
-        val intent = Intent(this, Camera::class.java)
+        val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
+
 }

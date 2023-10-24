@@ -24,7 +24,7 @@ import com.example.submissiondicoding.preferences.UserPreference
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class LoginActivity : AppCompatActivity() {
+class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         checkField()
         playAnimation()
         binding.txtRegister.setOnClickListener {
-            val intent = Intent(this@LoginActivity, Register::class.java)
+            val intent = Intent(this@Login, Register::class.java)
             startActivity(intent)
         }
     }
@@ -115,12 +115,12 @@ class LoginActivity : AppCompatActivity() {
                             }
                                 is com.example.submissiondicoding.api.Result.Success -> {
                                 binding.progressBar.visibility = View.INVISIBLE
-                                Toast.makeText(this@LoginActivity,R.string.succes, Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                Toast.makeText(this@Login,R.string.succes, Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@Login, MainActivity::class.java)
                                 startActivity(intent)
                             }
                             is com.example.submissiondicoding.api.Result.Error -> {
-                                Toast.makeText(this@LoginActivity,R.string.failed, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@Login,R.string.failed, Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

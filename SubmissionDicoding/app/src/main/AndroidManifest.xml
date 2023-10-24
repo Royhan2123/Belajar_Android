@@ -20,16 +20,16 @@
         android:theme="@style/Theme.SubmissionDicoding"
         tools:targetApi="31">
         <activity
-            android:name=".AddStoryActivity"
+            android:name=".AddStory"
             android:exported="false" />
         <activity
             android:name=".CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".Detail"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".Register"

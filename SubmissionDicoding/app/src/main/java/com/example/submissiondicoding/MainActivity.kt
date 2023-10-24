@@ -12,7 +12,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.story.UI.main.UserStoryAdapter
 import com.example.submissiondicoding.databinding.ActivityMainBinding
 import com.example.submissiondicoding.di.Injection
 import com.example.submissiondicoding.model.LoginViewModel
@@ -21,6 +20,7 @@ import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
 import com.example.submissiondicoding.api.Result
+import com.example.submissiondicoding.model.UserStoryAdapter
 import kotlinx.coroutines.launch
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             if (isLogin) {
                 supportActionBar?.title = "Story"
             } else {
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                startActivity(Intent(this@MainActivity, Login::class.java))
                 finish()
             }
         }
@@ -67,13 +67,13 @@ class MainActivity : AppCompatActivity() {
         binding.imgLogout.setOnClickListener {
             lifecycleScope.launch {
                 mainViewModel.logout()
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                startActivity(Intent(this@MainActivity, Login::class.java))
                 finish()
             }
         }
 
         binding.addStory.setOnClickListener {
-            val intent = Intent(this, AddStoryActivity::class.java)
+            val intent = Intent(this, AddStory::class.java)
             startActivity(intent)
         }
     }

@@ -1,5 +1,4 @@
-package com.example.story.UI.main
-
+package com.example.submissiondicoding.model
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.submissiondicoding.DetailActivity
+import com.example.submissiondicoding.Detail
 import com.example.submissiondicoding.R
 import com.example.submissiondicoding.api.response.StoryItem
 import com.example.submissiondicoding.databinding.StoryItemBinding
@@ -40,8 +39,8 @@ class UserStoryAdapter :
 
         // Menambahkan onClickListener untuk navigasi ke DetailActivity
         holder.binding.cardView.setOnClickListener {
-            val intent = Intent(it.context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_ID, userStory.id)
+            val intent = Intent(it.context, Detail::class.java)
+            intent.putExtra(Detail.EXTRA_ID, userStory.id)
             it.context.startActivity(intent)
         }
     }
