@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.story.api.response.LoginResponse
 import com.example.submissiondicoding.api.StoryRepository
 import com.example.submissiondicoding.preferences.UserPreference
 import kotlinx.coroutines.launch
 import com.example.submissiondicoding.api.Result
+import com.example.submissiondicoding.api.response.LoginResponse
 
 class LoginViewModel(private val repository: StoryRepository, private val userPreference: UserPreference) : ViewModel() {
     private var _loginResult = MutableLiveData<Result<LoginResponse>>()
