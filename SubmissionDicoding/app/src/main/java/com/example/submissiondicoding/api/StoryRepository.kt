@@ -1,7 +1,5 @@
 package com.example.submissiondicoding.api
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.example.submissiondicoding.api.response.LoginResponse
 import com.example.submissiondicoding.api.response.LoginResult
 import com.example.submissiondicoding.api.response.RegisterResponse
@@ -20,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+
 
 class StoryRepository private constructor(
     private val apiService: ApiService,
@@ -42,6 +41,7 @@ class StoryRepository private constructor(
         }
     }
 
+
     suspend fun loginAccount(email: String, password: String): LoginResponse {
         Result.Loading
         return try {
@@ -50,6 +50,7 @@ class StoryRepository private constructor(
 
             if (response.error) {
                 LoginResponse(LoginResult(token = ""), true, response.message)
+
             } else {
                 token = response.loginResult.token
                 userPreference.saveToken(token)
@@ -62,6 +63,7 @@ class StoryRepository private constructor(
             LoginResponse(LoginResult(token = ""), true, e.message ?: "Failed to login")
         }
     }
+
 
     fun getStory(token: String): LiveData<Result<List<StoryItem>>> = liveData {
         emit(Result.Loading)
@@ -135,8 +137,10 @@ class StoryRepository private constructor(
     companion object {
         @Volatile
         private var instance: StoryRepository? = null
-
-        fun getInstance(apiService: ApiService, userPreference: UserPreference): StoryRepository =
+        fun getInstance(
+            apiService: ApiService,
+            userPreference: UserPreference,
+        ): StoryRepository =
             instance ?: synchronized(this) {
                 instance ?: StoryRepository(apiService, userPreference)
             }.also { instance = it }
