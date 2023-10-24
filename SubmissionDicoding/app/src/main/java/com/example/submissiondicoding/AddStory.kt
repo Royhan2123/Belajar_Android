@@ -12,13 +12,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.submissiondicoding.api.Result
 import com.example.submissiondicoding.databinding.ActivityAddStoryBinding
 import com.example.submissiondicoding.di.Injection
@@ -26,12 +24,11 @@ import com.example.submissiondicoding.model.LoginViewModel
 import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
-import kotlinx.coroutines.launch
 import java.io.File
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class AddStoryActivity : AppCompatActivity() {
+class AddStory : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var storyViewModel: MainViewModel
     private lateinit var loginViewModel: LoginViewModel
@@ -105,21 +102,21 @@ class AddStoryActivity : AppCompatActivity() {
                                 }
                                 is Result.Success -> {
                                     binding.progressBar.visibility = View.INVISIBLE
-                                    Toast.makeText(this@AddStoryActivity, "Success upload story", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@AddStory, "Success upload story", Toast.LENGTH_SHORT).show()
                                     finish()
                                 }
                                 is Result.Error -> {
-                                    Toast.makeText(this@AddStoryActivity, "Fail upload story", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@AddStory, "Fail upload story", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
                     } else {
-                        Toast.makeText(this@AddStoryActivity, "Token is empty!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddStory, "Token is empty!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         } else {
-            Toast.makeText(this@AddStoryActivity, "Image cannot be empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddStory, "Image cannot be empty", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -129,7 +126,7 @@ class AddStoryActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val selectedImg = result?.data?.data as Uri
             selectedImg.let { uri ->
-                val myFile = uriToFile(uri, this@AddStoryActivity)
+                val myFile = uriToFile(uri, this@AddStory)
                 getFile = myFile
                 binding.previewImageView.setImageURI(uri)
             }
@@ -166,7 +163,7 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
+        val intent = Intent(this, Camera::class.java)
         launcherIntentCameraX.launch(intent)
     }
 }

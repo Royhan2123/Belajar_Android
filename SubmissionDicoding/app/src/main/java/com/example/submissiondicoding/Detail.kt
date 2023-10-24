@@ -2,12 +2,12 @@ package com.example.submissiondicoding
 
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -49,7 +49,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        @Suppress("DEPRECATION")
+        hideSystemUI()
+    }
+
+    private fun hideSystemUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -71,32 +74,36 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupEvent(id: String) {
         loginViewModel.readToken().observe(this) { token ->
-            storyViewModel.getStoryDetail(token, id).observe(this) { result ->
-                when (result) {
-                    is Result.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is Result.Success -> {
-                        binding.progressBar.visibility = View.GONE
-                        val storyData = result.data
+            if (token.isNotEmpty()) {
+                storyViewModel.getStoryDetail(token, id).observe(this) { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is Result.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            val storyData = result.data
 
-                        Glide.with(this)
-                            .load(storyData.photoUrl)
-                            .error(R.drawable.baseline_broken_image_24)
-                            .centerCrop()
-                            .into(binding.imgDetail)
-                        binding.txtName.text = storyData.name
-                        binding.txtDesc.text = storyData.description
-                    }
-                    is Result.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@DetailActivity,
-                            "Terjadi Kesalahan: ${result.err}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Glide.with(this)
+                                .load(storyData.photoUrl)
+                                .error(R.drawable.baseline_broken_image_24)
+                                .centerCrop()
+                                .into(binding.imgDetail)
+                            binding.txtName.text = storyData.name
+                            binding.txtDesc.text = storyData.description
+                        }
+                        is Result.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@DetailActivity,
+                                "Terjadi Kesalahan: ${result.err}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
+            } else {
+                Toast.makeText(this@DetailActivity, "Token is empty!", Toast.LENGTH_SHORT).show()
             }
         }
     }
