@@ -1,5 +1,4 @@
-package com.example.story.api.response
-
+package com.example.submissiondicoding.api.response
 import com.google.gson.annotations.SerializedName
 
 data class StoryResponse(

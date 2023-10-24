@@ -99,19 +99,19 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.galleryButton.setOnClickListener { startGallery() }
-        binding.cameraButton.setOnClickListener { startCameraX() }
-        binding.buttonAdd.setOnClickListener { uploadImage() }
+        binding.btnGallery.setOnClickListener { startGallery() }
+        binding.btnCamera.setOnClickListener { startCameraX() }
+        binding.btnUpload.setOnClickListener { uploadImage() }
     }
 
     private fun uploadImage() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
-            val description = binding.edAddDescription.text.toString()
+            val description = binding.edtDesc.text.toString()
 
             // show error in description is empty
             if (description.isEmpty()) {
-                binding.edAddDescription.error = "Description cannot be empty !"
+                binding.edtDesc.error = "Description cannot be empty !"
             }
 
             // Upload Event

@@ -21,7 +21,9 @@
             android:id="@+id/previewImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_image_24" />
+            android:importantForAccessibility="no"
+            android:src="@drawable/baseline_image_24"
+            tools:ignore="ImageContrastCheck" />
     </RelativeLayout>
 
     <LinearLayout
@@ -34,26 +36,28 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
         <Button
-            android:id="@+id/cameraButton"
+            android:id="@+id/btnCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Camera"
+            android:text="@string/camera"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:ignore="ButtonStyle" />
 
         <Button
-            android:id="@+id/galleryButton"
+            android:id="@+id/btnGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Gallery"
+            android:text="@string/gallery"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/ed_add_description"
+        android:id="@+id/edtDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -61,7 +65,7 @@
         android:background="@drawable/image_rounded"
         android:layout_marginEnd="16dp"
         android:gravity="top"
-        android:hint="Deskripsi"
+        android:hint="@string/deskripsi"
         android:inputType="textMultiLine"
         android:lines="5"
         android:maxLines="10"
@@ -69,19 +73,21 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/btnUpload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Upload"
+        android:text="@string/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_add_description" />
+        app:layout_constraintTop_toBottomOf="@+id/edtDesc"
+        tools:ignore="VisualLintButtonSize" />
 
     <ProgressBar
         android:id="@+id/progressBar"

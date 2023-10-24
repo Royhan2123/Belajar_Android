@@ -16,4 +16,8 @@
     <string name="login_your_account">Masukkan password</string>
     <string name="succes">Succes</string>
     <string name="failed">Failed</string>
+    <string name="upload">Upload</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 </resources>
