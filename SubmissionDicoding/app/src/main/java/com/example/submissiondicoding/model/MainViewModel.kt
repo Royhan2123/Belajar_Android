@@ -19,7 +19,7 @@ class MainViewModel(private val storyRepository: StoryRepository) : ViewModel() 
 
     fun uploadStory(token: String, description: String, photo: File) {
         viewModelScope.launch {
-            com.example.submissiondicoding.api.Result.Loading
+            Result.Loading
             try {
                 val result = storyRepository.uploadStory(token, description, photo)
                 _uploadResult.value = Result.Success(result)
