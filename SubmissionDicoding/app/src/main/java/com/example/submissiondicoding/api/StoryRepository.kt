@@ -1,6 +1,12 @@
 package com.example.submissiondicoding.api
-import androidx.lifecycle.*
-import com.example.story.api.response.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
+import com.example.submissiondicoding.api.response.LoginResponse
+import com.example.submissiondicoding.api.response.LoginResult
+import com.example.submissiondicoding.api.response.RegisterResponse
+import com.example.submissiondicoding.api.response.StoryDetail
+import com.example.submissiondicoding.api.response.StoryItem
+import com.example.submissiondicoding.api.response.UploadResponse
 import com.example.submissiondicoding.api.retrofit.ApiService
 import com.example.submissiondicoding.model.LoginModel
 import com.example.submissiondicoding.model.RegisterModel

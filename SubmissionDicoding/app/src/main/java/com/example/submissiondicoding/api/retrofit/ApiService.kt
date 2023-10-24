@@ -1,5 +1,9 @@
 package com.example.submissiondicoding.api.retrofit
-import com.example.story.api.response.*
+import com.example.submissiondicoding.api.response.DetailResponse
+import com.example.submissiondicoding.api.response.LoginResponse
+import com.example.submissiondicoding.api.response.RegisterResponse
+import com.example.submissiondicoding.api.response.StoryResponse
+import com.example.submissiondicoding.api.response.UploadResponse
 import com.example.submissiondicoding.model.LoginModel
 import com.example.submissiondicoding.model.RegisterModel
 

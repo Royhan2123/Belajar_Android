@@ -17,8 +17,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.example.story.*
-import com.example.story.api.*
 import com.example.submissiondicoding.databinding.ActivityAddStoryBinding
 import com.example.submissiondicoding.di.Injection
 import com.example.submissiondicoding.model.LoginViewModel
