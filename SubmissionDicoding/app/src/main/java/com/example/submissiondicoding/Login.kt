@@ -2,6 +2,7 @@ package com.example.submissiondicoding
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -20,13 +21,12 @@ import com.example.submissiondicoding.di.Injection
 import com.example.submissiondicoding.model.LoginViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
-import com.example.submissiondicoding.api.Result
-
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -34,42 +34,63 @@ class Login : AppCompatActivity() {
 
         setupView()
         checkField()
-        appearAnimation()
-
-        // to register
+        playAnimation()
+        // untuk mendaftar
         binding.register.setOnClickListener {
-            val intent = Intent(this@Login, Register::class.java)
+            val intent = Intent(this@LoginActivity, Register::class.java)
             startActivity(intent)
         }
     }
 
-    private fun appearAnimation() {
-        val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(700)
-        val emailText =
-            ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(700)
-        val emailEditlayout =
-            ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(700)
-        val passwordText =
-            ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(700)
-        val passwordEditLayout =
-            ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(700)
-        val btn = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(700)
-        val register = ObjectAnimator.ofFloat(binding.register, View.ALPHA, 1f).setDuration(700)
-        val orText = ObjectAnimator.ofFloat(binding.textView, View.ALPHA, 1f).setDuration(700)
+    @SuppressLint("Recycle")
+    private fun playAnimation(){
+        // Set visibility
+        binding.imgLogo.visibility = View.VISIBLE
+        binding.txtloginAccount.visibility = View.VISIBLE
+        binding.tvEmailTitle.visibility = View.VISIBLE
+        binding.edtEmail.visibility = View.VISIBLE
+        binding.tvPasswordTitle.visibility = View.VISIBLE
+        binding.edtPassword.visibility = View.VISIBLE
+        binding.btnLogin.visibility = View.VISIBLE
+        binding.layoutTextRegister.visibility = View.VISIBLE
+        binding.tvIsHaventAccount.visibility = View.VISIBLE
+        binding.tvToRegister.visibility = View.VISIBLE
 
-        AnimatorSet().apply {
-            playSequentially(
-                title,
-                emailText,
-                emailEditlayout,
-                passwordText,
-                passwordEditLayout,
-                btn,
-                orText,
-                register,
-            )
+
+        binding.imgLogo.alpha = 0f
+        binding.txtloginAccount.alpha = 0f
+        binding.tvEmailTitle.alpha = 0f
+        binding.edtEmail.alpha = 0f
+        binding.tvPasswordTitle.alpha = 0f
+        binding.edtPassword.alpha = 0f
+        binding.btnLogin.alpha = 0f
+        binding.layoutTextRegister.alpha = 0f
+        binding.tvIsHaventAccount.alpha = 0f
+        binding.tvToRegister.alpha = 0f
+
+        // Create animator set
+        val animatorSet = AnimatorSet()
+        ObjectAnimator.ofFloat(binding.imgLogo, View.TRANSLATION_X,-50f,50f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
         }.start()
+        animatorSet.playSequentially(
+            ObjectAnimator.ofFloat(binding.imgLogo, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.txtloginAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvEmailTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvPasswordTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.layoutTextRegister, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvIsHaventAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvToRegister, View.ALPHA, 1f).setDuration(500),
+        )
+        // Start animation
+        animatorSet.start()
     }
+
 
     private fun setupView() {
         @Suppress("DEPRECATION")
@@ -92,11 +113,9 @@ class Login : AppCompatActivity() {
                 email.isEmpty() -> {
                     binding.emailEditTextLayout.error = "Masukkan email"
                 }
-
                 password.isEmpty() -> {
                     binding.passwordEditTextLayout.error = "Masukkan password"
                 }
-
                 else -> {
                     val repository = Injection.provideRepository(this)
                     val userPreference = UserPreference.getInstance(this.dataStore)
@@ -107,29 +126,17 @@ class Login : AppCompatActivity() {
                     loginViewModel.loginAccount(email, password)
                     loginViewModel.loginResult.observe(this) { result ->
                         when (result) {
-                            is Result.Loading -> {
+                            is com.example.submissiondicoding.api.Result.Loading -> {
                                 binding.progressBar.visibility = View.VISIBLE
                             }
-
-                            is Result.Success -> {
+                            is com.example.submissiondicoding.api.Result.Success -> {
                                 binding.progressBar.visibility = View.INVISIBLE
-                                Toast.makeText(
-                                    this@Login,
-                                    "Login Success",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                                val intent = Intent(this@Login, MainActivity::class.java)
+                                Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 startActivity(intent)
                             }
-
-                            is Result.Error -> {
-                                Toast.makeText(
-                                    this@Login,
-                                    "Login Failed",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
+                            is com.example.submissiondicoding.api.Result.Error -> {
+                                Toast.makeText(this@LoginActivity, "Login Gagal", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

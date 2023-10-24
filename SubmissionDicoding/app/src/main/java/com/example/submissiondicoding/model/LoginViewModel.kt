@@ -10,7 +10,6 @@ import com.example.submissiondicoding.preferences.UserPreference
 import kotlinx.coroutines.launch
 import com.example.submissiondicoding.api.Result
 
-
 class LoginViewModel(private val repository: StoryRepository, private val userPreference: UserPreference) : ViewModel() {
     private var _loginResult = MutableLiveData<Result<LoginResponse>>()
     val loginResult: LiveData<Result<LoginResponse>> get() = _loginResult
@@ -24,7 +23,7 @@ class LoginViewModel(private val repository: StoryRepository, private val userPr
     }
     fun loginAccount(email: String, password: String) {
         viewModelScope.launch {
-            com.example.submissiondicoding.api.Result.Loading
+            Result.Loading
             try {
                 val result = repository.loginAccount(email, password)
                 _loginResult.value = Result.Success(result)

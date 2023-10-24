@@ -2,6 +2,7 @@ package com.example.submissiondicoding
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -22,8 +23,10 @@ import com.example.submissiondicoding.preferences.UserPreference
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+
 class Register : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -31,7 +34,62 @@ class Register : AppCompatActivity() {
 
         setupView()
         setupAction()
-        appearAnimation()
+        playAnimation()
+    }
+
+    @SuppressLint("Recycle")
+    private fun playAnimation(){
+        // Set visibility
+        binding.imgLogo.visibility = View.VISIBLE
+        binding.txtCreateAccount.visibility = View.VISIBLE
+        binding.tvNameTitle.visibility = View.VISIBLE
+        binding.edtName.visibility = View.VISIBLE
+        binding.tvEmailTitle.visibility = View.VISIBLE
+        binding.edtEmail.visibility = View.VISIBLE
+        binding.tvPasswordTitle.visibility = View.VISIBLE
+        binding.edtPassword.visibility = View.VISIBLE
+        binding.btnRegister.visibility = View.VISIBLE
+        binding.layoutTextRegister.visibility = View.VISIBLE
+        binding.tvIsHaveAccount.visibility = View.VISIBLE
+        binding.tvToLogin.visibility = View.VISIBLE
+
+
+        binding.imgLogo.alpha = 0f
+        binding.tvNameTitle.alpha = 0f
+        binding.txtCreateAccount.alpha = 0f
+        binding.edtName.alpha = 0f
+        binding.tvEmailTitle.alpha = 0f
+        binding.edtEmail.alpha = 0f
+        binding.tvPasswordTitle.alpha = 0f
+        binding.edtPassword.alpha = 0f
+        binding.btnRegister.alpha = 0f
+        binding.layoutTextRegister.alpha = 0f
+        binding.tvIsHaveAccount.alpha = 0f
+        binding.tvToLogin.alpha = 0f
+
+        // Create animator set
+        val animatorSet = AnimatorSet()
+        ObjectAnimator.ofFloat(binding.imgLogo, View.TRANSLATION_X,-50f,50f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+        animatorSet.playSequentially(
+            ObjectAnimator.ofFloat(binding.imgLogo, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.txtCreateAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvNameTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtName, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvEmailTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvPasswordTitle, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.layoutTextRegister, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvIsHaveAccount, View.ALPHA, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvToLogin, View.ALPHA, 1f).setDuration(500),
+        )
+        // Start animation
+        animatorSet.start()
     }
     private fun setupView() {
         @Suppress("DEPRECATION")
@@ -47,10 +105,10 @@ class Register : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.registerButton.setOnClickListener {
-            val name = binding.nameEditText.text.toString()
-            val email = binding.emailEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+        binding.btnRegister.setOnClickListener {
+            val name = binding.edtName.text.toString()
+            val email = binding.edtEmail.text.toString()
+            val password = binding.edtPassword.text.toString()
             when {
                 name.isEmpty() -> {
                     binding.nameEditTextLayout.error = "Please input your name"
@@ -70,38 +128,11 @@ class Register : AppCompatActivity() {
                     val factory = ViewModelFactory(repository, userPreference)
                     val signupViewModel: SignupViewModel by viewModels { factory }
                     signupViewModel.registerAccount(name, email, password)
-                    startActivity(Intent(this, Login::class.java))
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
         }
     }
 
-    private fun appearAnimation() {
-        val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(500)
-        val nameText = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(500)
-        val nameEditLayout =
-            ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(500)
-        val emailText =
-            ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(500)
-        val emailEditlayout =
-            ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(500)
-        val passwordText =
-            ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(500)
-        val passwordEditLayout =
-            ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(500)
-        val btn = ObjectAnimator.ofFloat(binding.registerButton, View.ALPHA, 1f).setDuration(500)
 
-        AnimatorSet().apply {
-            playSequentially(
-                title,
-                nameText,
-                nameEditLayout,
-                emailText,
-                emailEditlayout,
-                passwordText,
-                passwordEditLayout,
-                btn
-            )
-        }.start()
-    }
 }

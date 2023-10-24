@@ -23,7 +23,7 @@ import com.example.submissiondicoding.preferences.UserPreference
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class Detail : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var storyViewModel: MainViewModel
@@ -44,7 +44,7 @@ class Detail : AppCompatActivity() {
         if (!id.isNullOrEmpty()) {
             setupEvent(id)
         } else {
-            Toast.makeText(this@Detail, "An Error Occuired", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@DetailActivity, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -72,33 +72,29 @@ class Detail : AppCompatActivity() {
     private fun setupEvent(id: String) {
         loginViewModel.readToken().observe(this) { token ->
             storyViewModel.getStoryDetail(token, id).observe(this) { result ->
-                if (result != null) {
-                    when (result) {
-                        is Result.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                        }
+                when (result) {
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val storyData = result.data
 
-                        is Result.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            val storyData = result.data
-
-                            Glide.with(this)
-                                .load(storyData.photoUrl)
-                                .error(R.drawable.baseline_broken_image_24)
-                                .centerCrop()
-                                .into(binding.ivDetailPhoto)
-                            binding.tvDetailName.text = storyData.name
-                            binding.tvDetailDescription.text = storyData.description
-                        }
-
-                        is Result.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this@Detail,
-                                "An Error Occuired" + result.err,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        Glide.with(this)
+                            .load(storyData.photoUrl)
+                            .error(R.drawable.baseline_broken_image_24)
+                            .centerCrop()
+                            .into(binding.ivDetailPhoto)
+                        binding.tvDetailName.text = storyData.name
+                        binding.tvDetailDescription.text = storyData.description
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(
+                            this@DetailActivity,
+                            "Terjadi Kesalahan: ${result.err}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

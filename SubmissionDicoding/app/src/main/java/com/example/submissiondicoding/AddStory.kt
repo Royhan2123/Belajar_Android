@@ -1,5 +1,4 @@
 package com.example.submissiondicoding
-
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -18,17 +17,21 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.example.story.*
+import com.example.story.api.*
 import com.example.submissiondicoding.databinding.ActivityAddStoryBinding
 import com.example.submissiondicoding.di.Injection
 import com.example.submissiondicoding.model.LoginViewModel
 import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
-import com.example.submissiondicoding.api.Result
 import java.io.File
+import com.example.submissiondicoding.api.Result
+
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class AddStory : AppCompatActivity() {
+
+class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var storyViewModel: MainViewModel
     private lateinit var loginViewModel: LoginViewModel
@@ -64,6 +67,7 @@ class AddStory : AppCompatActivity() {
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
@@ -83,6 +87,8 @@ class AddStory : AppCompatActivity() {
         setupViewModel()
         setupAction()
     }
+
+
     private fun setupViewModel() {
         val userPref = UserPreference.getInstance(dataStore)
         val repository = Injection.provideRepository(this)
@@ -115,7 +121,7 @@ class AddStory : AppCompatActivity() {
                 if (token.isNotEmpty() && description.isNotEmpty()){
                     storyViewModel.uploadStory(token, description, file)
                 } else {
-                    Toast.makeText(this@AddStory, "Description cannot be empty !", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddStoryActivity, "Description cannot be empty !", Toast.LENGTH_SHORT).show()
                 }
 
                 storyViewModel.uploadResult.observe(this) { result ->
@@ -126,7 +132,7 @@ class AddStory : AppCompatActivity() {
                         is Result.Success -> {
                             binding.progressBar.visibility = View.INVISIBLE
                             Toast.makeText(
-                                this@AddStory,
+                                this@AddStoryActivity,
                                 "Success upload story",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -134,7 +140,7 @@ class AddStory : AppCompatActivity() {
                         }
                         is Result.Error -> {
                             Toast.makeText(
-                                this@AddStory,
+                                this@AddStoryActivity,
                                 "Fail upload story",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -143,10 +149,9 @@ class AddStory : AppCompatActivity() {
                 }
             }
 
-
         } else {
             Toast.makeText(
-                this@AddStory,
+                this@AddStoryActivity,
                 "Image cannot be empty",
                 Toast.LENGTH_SHORT
             ).show()
@@ -161,7 +166,7 @@ class AddStory : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val selectemImg = result?.data?.data as Uri
             selectemImg.let { uri ->
-                val myFile = uriToFile(uri, this@AddStory)
+                val myFile = uriToFile(uri, this@AddStoryActivity)
                 getFile = myFile
                 binding.previewImageView.setImageURI(uri)
             }
@@ -199,7 +204,8 @@ class AddStory : AppCompatActivity() {
     }
 
     private fun startCameraX() {
-        val intent = Intent(this, Camera::class.java)
+        val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
+
 }

@@ -1,4 +1,5 @@
-package com.example.submissiondicoding.model
+package com.example.story.UI.main
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.story.api.response.StoryItem
-import com.example.submissiondicoding.Detail
+import com.example.submissiondicoding.DetailActivity
 import com.example.submissiondicoding.R
 import com.example.submissiondicoding.databinding.StoryItemBinding
 
@@ -41,8 +42,8 @@ class UserStoryAdapter :
 
         // to detail
         holder.binding.cardView.setOnClickListener {
-            val intent = Intent(it.context, Detail::class.java)
-            intent.putExtra(Detail.EXTRA_ID, userStory.id)
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_ID, userStory.id)
             holder.itemView.context.startActivity(intent)
         }
     }
