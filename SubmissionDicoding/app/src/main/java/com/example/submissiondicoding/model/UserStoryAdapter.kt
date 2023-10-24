@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.story.api.response.StoryItem
 import com.example.submissiondicoding.DetailActivity
 import com.example.submissiondicoding.R
+import com.example.submissiondicoding.api.response.StoryItem
 import com.example.submissiondicoding.databinding.StoryItemBinding
 
 

@@ -20,8 +20,8 @@ import com.example.submissiondicoding.model.LogoutViewModel
 import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
-import kotlinx.coroutines.launch
 import com.example.submissiondicoding.api.Result
+import kotlinx.coroutines.launch
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -88,17 +88,15 @@ class MainActivity : AppCompatActivity() {
             storyViewModel.getStory(token).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        binding.progresBar.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
-                        binding.progresBar.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
                         val storyData = result.data
                         userStoryAdapter.submitList(storyData)
-
-                        layoutManager.scrollToPosition(0)
                     }
                     is Result.Error -> {
-                        binding.progresBar.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
                         Toast.makeText(
                             this@MainActivity,
                             "An Error Occurred: ${result.err}",
