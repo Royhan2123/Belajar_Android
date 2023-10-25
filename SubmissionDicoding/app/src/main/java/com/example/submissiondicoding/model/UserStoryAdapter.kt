@@ -1,4 +1,5 @@
 package com.example.submissiondicoding.model
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.submissiondicoding.R
 import com.example.submissiondicoding.api.response.StoryItem
 import com.example.submissiondicoding.databinding.StoryItemBinding
 
+
 class UserStoryAdapter :
     ListAdapter<StoryItem, UserStoryAdapter.UserStoryViewHolder>(DIFF_CALLBACK) {
 
@@ -20,7 +22,7 @@ class UserStoryAdapter :
                 override fun areItemsTheSame(oldUser: StoryItem, newUser: StoryItem): Boolean {
                     return oldUser.id == newUser.id
                 }
-
+                @SuppressLint("DiffUtilEquals")
                 override fun areContentsTheSame(oldUser: StoryItem, newUser: StoryItem): Boolean {
                     return oldUser == newUser
                 }
@@ -37,18 +39,17 @@ class UserStoryAdapter :
         val userStory = getItem(position)
         holder.bind(userStory)
 
-        // Menambahkan onClickListener untuk navigasi ke DetailActivity
+        // to detail
         holder.binding.cardView.setOnClickListener {
             val intent = Intent(it.context, Detail::class.java)
             intent.putExtra(Detail.EXTRA_ID, userStory.id)
-            it.context.startActivity(intent)
+            holder.itemView.context.startActivity(intent)
         }
     }
 
     class UserStoryViewHolder(val binding: StoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userStory: StoryItem) {
-            // Mengikat data ke tampilan
             binding.itemName.text = userStory.name
             Glide.with(itemView.context)
                 .load(userStory.photoUrl)

@@ -16,6 +16,6 @@ interface NoteDao {
     fun update(note: Note)
     @Delete
     fun delete(note: Note)
-    @Query("SELECT * from note ORDER BY id ASC")
+    @Query("SELECT * from note ORDER BY id ASC") // <= select ngambil data * semua data dari note
     fun getAllNotes(): LiveData<List<Note>>
 }

@@ -24,6 +24,9 @@ import com.example.submissiondicoding.model.LoginViewModel
 import com.example.submissiondicoding.model.MainViewModel
 import com.example.submissiondicoding.model.ViewModelFactory
 import com.example.submissiondicoding.preferences.UserPreference
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 
@@ -134,7 +137,10 @@ class AddStory : AppCompatActivity() {
                                 "Success upload story",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            finish()
+                            GlobalScope.launch {
+                                delay(2000)
+                                finish()
+                            }
                         }
                         is Result.Error -> {
                             Toast.makeText(
