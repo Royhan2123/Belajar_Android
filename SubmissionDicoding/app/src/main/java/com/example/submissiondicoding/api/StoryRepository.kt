@@ -1,7 +1,13 @@
 package com.example.submissiondicoding.api
+import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.submissiondicoding.api.response.LoginResponse
 import com.example.submissiondicoding.api.response.LoginResult
+import com.example.submissiondicoding.api.response.MapItem
 import com.example.submissiondicoding.api.response.RegisterResponse
 import com.example.submissiondicoding.api.response.StoryDetail
 import com.example.submissiondicoding.api.response.StoryItem
@@ -18,6 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import com.example.submissiondicoding.api.Result
 
 
 class StoryRepository private constructor(
@@ -64,27 +71,15 @@ class StoryRepository private constructor(
         }
     }
 
-
-    fun getStory(token: String): LiveData<Result<List<StoryItem>>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getAllStories("Bearer $token")
-            val stories = response.listStory
-            val storyList = stories?.map { story ->
-                StoryItem(
-                    story?.photoUrl,
-                    story?.createdAt,
-                    story?.name,
-                    story?.description,
-                    story?.lon,
-                    story?.id,
-                    story?.lat,
-                )
+    fun getStoryPaging(token: String): LiveData<PagingData<StoryItem>>{
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource("Bearer $token", apiService)
             }
-            emit(Result.Success(storyList ?: emptyList()))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
+        ).liveData
     }
 
     fun getDetailStory(token: String, id: String): LiveData<Result<StoryDetail>> = liveData {
@@ -132,6 +127,30 @@ class StoryRepository private constructor(
             }
 
         })
+    }
+
+    fun getMapStory(token: String): LiveData<Result<List<MapItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStoriesMap("Bearer $token")
+            val maps = response.listStory
+            val mapList = maps?.map { story ->
+                MapItem(
+                    photoUrl = story?.photoUrl,
+                    createdAt = story?.createdAt,
+                    name = story?.name,
+                    description = story?.description,
+                    lon = story?.lon,
+                    id = story?.id,
+                    lat = story?.lat
+                )
+            }
+            Log.d("StoryRepository", "getStoriesMap: Panjang list ${mapList?.size} ")
+            emit(Result.Success(mapList ?: emptyList()))
+        } catch (e: Exception) {
+            Log.d("StoryRepository", "getStoriesMap: ${e.message.toString()} ")
+            emit(Result.Error(e.message.toString()))
+        }
     }
 
     companion object {

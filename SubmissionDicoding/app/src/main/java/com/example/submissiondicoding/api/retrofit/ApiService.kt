@@ -1,6 +1,7 @@
 package com.example.submissiondicoding.api.retrofit
 import com.example.submissiondicoding.api.response.DetailResponse
 import com.example.submissiondicoding.api.response.LoginResponse
+import com.example.submissiondicoding.api.response.MapResponse
 import com.example.submissiondicoding.api.response.RegisterResponse
 import com.example.submissiondicoding.api.response.StoryResponse
 import com.example.submissiondicoding.api.response.UploadResponse
@@ -17,6 +18,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @POST("register")
@@ -45,4 +47,13 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
     ): Call<UploadResponse>
+    @GET("stories")
+    suspend fun getStoryPaging(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+    ): StoryResponse
+
+    @GET("stories?location=1")
+    suspend fun getStoriesMap(@Header("Authorization") token: String) : MapResponse
 }
