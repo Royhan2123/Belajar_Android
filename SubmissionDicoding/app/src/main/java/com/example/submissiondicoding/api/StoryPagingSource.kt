@@ -18,13 +18,11 @@ class StoryPagingSource(private val token: String, private val apiService: ApiSe
             val responseData = apiService.getStoryPaging(token, position, params.loadSize)
             val stories = responseData.listStory
 
-            if (stories != null) {
-                Log.d("Paging Source", "Panjang data story ${stories.size}")
-            }
+            Log.d("Paging Source", "Panjang data story ${stories.size}")
             LoadResult.Page(
                 data = stories,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-                nextKey = if (stories?.isEmpty() == true) null else position + 1
+                nextKey = if (stories.isEmpty()) null else position + 1
             )
         } catch (exception: Exception) {
             return LoadResult.Error(exception)
