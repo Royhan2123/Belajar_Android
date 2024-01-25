@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Hero">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/txtNameHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Hero"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Addres : "
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/txtAddresHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Addres"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City : "
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/txtCityHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="City"
+            android:textSize="15sp"/>
+    </LinearLayout>
+</LinearLayout>
