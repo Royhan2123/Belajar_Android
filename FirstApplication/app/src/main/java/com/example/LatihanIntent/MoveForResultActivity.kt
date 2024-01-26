@@ -1,8 +1,9 @@
-package com.example.firstapplication
+package com.example.LatihanIntent
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.firstapplication.R
 import com.example.firstapplication.databinding.ActivityMoveForResultBinding
 
 class MoveForResultActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class MoveForResultActivity : AppCompatActivity() {
 
         binding.btnChoose.setOnClickListener {
             if (binding.rgNumber.checkedRadioButtonId > 0){
+
                 var value = 0
                 when(binding.rgNumber.checkedRadioButtonId){
                     R.id.rb_50 -> value = 50
@@ -26,12 +28,12 @@ class MoveForResultActivity : AppCompatActivity() {
                     R.id.rb_150 -> value = 150
                     R.id.rb_200 -> value = 200
                 }
-
-                val resultIntent = Intent()
-                resultIntent.putExtra(EXTRA_SELECTED_VALUE,value)
-                setResult(RESULT_CODE,resultIntent)
+               val result = Intent()
+                result.putExtra(EXTRA_SELECTED_VALUE,value)
+                setResult(RESULT_CODE,result)
                 finish()
             }
         }
+
     }
 }

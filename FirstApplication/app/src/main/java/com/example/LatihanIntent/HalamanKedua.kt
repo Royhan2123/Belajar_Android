@@ -1,4 +1,4 @@
-package com.example.firstapplication
+package com.example.LatihanIntent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,16 +7,16 @@ import com.example.firstapplication.databinding.ActivityHalamanKeduaBinding
 class HalamanKedua : AppCompatActivity() {
     private lateinit var binding:ActivityHalamanKeduaBinding
     companion object {
-        const val HALAMAN = "halaman"
+        const val NAME = "name"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHalamanKeduaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val halaman = intent.getStringExtra(HALAMAN)
+        val name = intent.getStringExtra(NAME)
 
-        val text = "Ini Halaman $halaman"
+        val text = "halaman $name"
 
         binding.txtHalaman.text = text
     }

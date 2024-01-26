@@ -1,4 +1,4 @@
-package com.example.person
+package com.example.LatihanIntent.person
 
 import android.os.Parcel
 import android.os.Parcelable

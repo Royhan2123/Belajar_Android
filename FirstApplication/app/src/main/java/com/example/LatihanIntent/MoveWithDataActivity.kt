@@ -1,4 +1,4 @@
-package com.example.firstapplication
+package com.example.LatihanIntent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
