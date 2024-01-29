@@ -1,13 +1,11 @@
 package com.example.firstapplication
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
-
-@Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
 data class Hero(
     val name:String,
     val description:String,
-    val photo:Int,
+    val photo:Int
 ) : Parcelable
