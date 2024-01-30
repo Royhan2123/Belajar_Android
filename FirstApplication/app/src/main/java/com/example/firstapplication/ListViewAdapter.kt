@@ -8,30 +8,36 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ListViewAdapter (private val listHero:ArrayList<Hero>) :
-RecyclerView.Adapter<ListViewAdapter.ListViewHolder>(){
+class ListHeroAdapter(
+    private val listHero: ArrayList<Hero>,
+    private val listener: (Hero) -> Unit
+) : RecyclerView.Adapter<ListHeroAdapter.ListViewHolder>() {
 
-    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imgPhoto:ImageView = view.findViewById(R.id.img_item_photo)
-        val tvName:TextView = view.findViewById(R.id.tv_item_name)
-        val tvDescription:TextView = view.findViewById(R.id.tv_item_description)
-    }
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListViewHolder {
-        val view:View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_hero,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_hero, parent, false)
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder:ListViewHolder, position: Int) {
-        val (name,description,photo) = listHero[position]
-        holder.tvName.text = name
-        holder.tvDescription.text = description
-        Glide.with(holder.itemView.context)
-            .load(photo)
-            .into(holder.imgPhoto)
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        holder.bindView(listHero[position])
+        holder.itemView.setOnClickListener {
+            listener(listHero[position])
+        }
     }
+
     override fun getItemCount(): Int = listHero.size
 
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val imgPhoto: ImageView = itemView.findViewById(R.id.img_item_photo)
+        private val tvName: TextView = itemView.findViewById(R.id.tv_item_name)
+        private val tvDescription: TextView = itemView.findViewById(R.id.tv_item_description)
+
+        fun bindView(hero: Hero) {
+            Glide.with(itemView.context)
+                .load(hero.photo)
+                .into(imgPhoto)
+            tvName.text = hero.name
+            tvDescription.text = hero.description
+        }
+    }
 }
