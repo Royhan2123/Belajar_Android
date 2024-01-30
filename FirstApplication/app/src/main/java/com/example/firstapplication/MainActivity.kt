@@ -8,7 +8,7 @@ import com.example.firstapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val hero = ArrayList<Hero>()
+    private val listHero = ArrayList<Hero>()
 
     companion object {
         const val EXTRA_NAME = "extra_name"
@@ -19,23 +19,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recycleView.setHasFixedSize(true)
-        hero.addAll(getListHero())
+        listHero.addAll(getAllList())
         showRecycleList()
     }
 
-    private fun showRecycleList() {
+    private fun showRecycleList(){
         binding.recycleView.layoutManager = LinearLayoutManager(this)
-        val adapter = ListHeroAdapter(hero) { selectedHero ->
-            Intent(this@MainActivity, HalamanDetail::class.java).apply {
-                putExtra(EXTRA_NAME, selectedHero)
+        val adapter = ListHeroAdapter(listHero) {selectHero ->
+            Intent(this@MainActivity,HalamanDetail::class.java).apply {
+                putExtra(EXTRA_NAME,selectHero)
                 startActivity(this)
             }
         }
         binding.recycleView.adapter = adapter
     }
 
-
-    private fun getListHero(): ArrayList<Hero> {
+    private fun getAllList(): ArrayList<Hero> {
         val dataName = resources.getStringArray(R.array.data_name)
         val dataDescription = resources.getStringArray(R.array.data_description)
         val dataPhoto = resources.getStringArray(R.array.data_photo)
@@ -43,11 +42,9 @@ class MainActivity : AppCompatActivity() {
         val listHero = ArrayList<Hero>()
 
         for (i in dataName.indices){
-            val heroes = Hero(dataName[i],dataDescription[i],dataPhoto[i])
-            listHero.add(heroes)
+            val hero = Hero(dataName[i],dataDescription[i],dataPhoto[i])
+            listHero.add(hero)
         }
-
         return listHero
     }
-
 }
