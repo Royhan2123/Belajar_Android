@@ -11,14 +11,5 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val supportFragment = supportFragmentManager
-        val homeFragment = HomeFragment()
-        val fragment = supportFragment.findFragmentByTag(HomeFragment::class.java.simpleName)
-
-        if (fragment !is HomeFragment){
-            supportFragment.beginTransaction()
-                .add(R.id.container,homeFragment,HomeFragment::class.java.simpleName)
-                .commit()
-        }
     }
 }
