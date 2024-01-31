@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val supportFragment = supportFragmentManager
+       val supportFragment = supportFragmentManager
         val homeFragment = HomeFragment()
         val fragment = supportFragment.findFragmentByTag(HomeFragment::class.java.simpleName)
 
