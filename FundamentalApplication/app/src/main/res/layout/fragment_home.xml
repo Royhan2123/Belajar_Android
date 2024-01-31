@@ -8,17 +8,17 @@
     android:gravity="center"
     tools:context=".HomeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_home_fragment"
-        android:layout_marginBottom="20dp"
-        android:textSize="20sp"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="20sp"
+       android:text="Selamat Datang di HomePage"/>
 
     <Button
         android:id="@+id/btnCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/category_name"/>
+        android:layout_marginTop="20dp"
+        android:text="Go to Category"/>
 
 </LinearLayout>
