@@ -10,8 +10,8 @@ import androidx.navigation.findNavController
 import com.example.fundamentalapplication.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    private var _binding:FragmentHomeBinding? = null
-   private val binding get() = _binding!!
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,16 +25,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnCategory.setOnClickListener {
-           view.findNavController().navigate(R.id.action_homeFragment_to_profileActivity)
+            view.findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
-
         binding.btnProfile.setOnClickListener {
             view.findNavController().navigate(R.id.action_homeFragment_to_profileActivity)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }
