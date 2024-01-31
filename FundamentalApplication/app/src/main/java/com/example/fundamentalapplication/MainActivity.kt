@@ -11,12 +11,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragmentManager = supportFragmentManager
+        val supportFragment = supportFragmentManager
         val homeFragment = HomeFragment()
-        val fragment = fragmentManager.findFragmentByTag(HomeFragment::class.java.simpleName)
+        val fragment = supportFragment.findFragmentByTag(HomeFragment::class.java.simpleName)
 
         if (fragment !is HomeFragment){
-            fragmentManager.beginTransaction()
+            supportFragment.beginTransaction()
                 .add(R.id.container,homeFragment,HomeFragment::class.java.simpleName)
                 .commit()
         }

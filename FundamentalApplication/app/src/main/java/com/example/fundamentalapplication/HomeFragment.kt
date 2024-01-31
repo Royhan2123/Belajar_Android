@@ -27,16 +27,15 @@ class HomeFragment : Fragment() {
             val parentFragment = parentFragmentManager
             val bundle = Bundle()
 
-            val descripsi = "Hello Everyone My name is Royhan and my old is twenty years old"
-            bundle.putString(CategoryFragment.EXTRA_NAME,"BIODATA")
-
-            categoryFragment.arguments = bundle
+            bundle.putString(CategoryFragment.EXTRA_NAME,"Royhan")
+            val descripsi = "My name is Royhan"
             categoryFragment.description = descripsi
+            categoryFragment.arguments = bundle
 
             parentFragment.beginTransaction().apply {
                 replace(R.id.container,categoryFragment,CategoryFragment::class.java.simpleName)
-                addToBackStack(null)
                 commit()
+                addToBackStack(null)
             }
         }
     }

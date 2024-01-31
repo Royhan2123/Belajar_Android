@@ -34,11 +34,11 @@ class CategoryFragment : Fragment() {
             val bundles = savedInstanceState.getString(EXTRA_DESCRIPTION)
             description = bundles
         }
+
         if (arguments != null){
             val argument = arguments?.getString(EXTRA_NAME)
             txtName.text = argument
             txtDescription.text = description
         }
-
     }
 }
