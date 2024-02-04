@@ -34,4 +34,7 @@
         <item>https://upload.wikimedia.org/wikipedia/commons/a/a6/Supomo.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/TanMalaka_DariPendjara_ed3.jpg/330px-TanMalaka_DariPendjara_ed3.jpg</item>
     </string-array>
+    <string name="quote">When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No. When they drink a soup made from a poisonous mushroom!? No! It’s when… they are FORGOTTEN.</string>
+    <string name="author">- Dr. Hiluluk</string>
+    <string name="show_list_quotes">Show me list of quotes</string>
 </resources>
