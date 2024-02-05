@@ -1,5 +1,6 @@
 package com.example.belajarbottomnavigation
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,14 +14,13 @@ class ListQouteAdapter(private val list:ArrayList<String>) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        TODO("Not yet implemented")
+        val view:View = LayoutInflater.from(parent.context).inflate(R.layout.item_quote,parent,false)
+        return ListViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.tvItem.text = list[position]
     }
 }

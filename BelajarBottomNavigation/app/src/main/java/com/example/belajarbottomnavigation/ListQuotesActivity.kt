@@ -23,5 +23,41 @@ class ListQuotesActivity : AppCompatActivity() {
         binding = ActivityListQuotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.listQuotes.setHasFixedSize(true)
+        binding.progressBar.visibility = View.VISIBLE
+
+        getListQoute()
+    }
+
+    private fun getListQoute(){
+        binding.progressBar.visibility = View.VISIBLE
+        val client = AsyncHttpClient()
+        val url = "https://quote-api.dicoding.dev/list"
+
+        client.get(url,object : AsyncHttpResponseHandler(){
+            override fun onSuccess(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?,
+                error: Throwable
+            ) {
+               val errorMessage = when(statusCode){
+                   401 -> "$statusCode : Bad Request "
+                   403 -> "$statusCode : Forbidden "
+                   404 -> "$statusCode : Not Found "
+                   else -> "$statusCode : ${error.message}"
+               }
+                Toast.makeText(this@ListQuotesActivity,errorMessage,Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }
