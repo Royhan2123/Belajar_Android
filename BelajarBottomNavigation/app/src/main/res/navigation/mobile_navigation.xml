@@ -15,11 +15,20 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.belajarbottomnavigation.ui.dashboard.DashboardFragment"
         android:label="dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_listQuotesActivity"
+            app:destination="@id/listQuotesActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.belajarbottomnavigation.ui.notifications.NotificationsFragment"
         android:label="notifications"
         tools:layout="@layout/fragment_notifications" />
+    <activity
+        android:id="@+id/listQuotesActivity"
+        android:name="com.example.belajarbottomnavigation.ListQuotesActivity"
+        android:label="activity_list_quotes"
+        tools:layout="@layout/activity_list_quotes" />
 </navigation>
