@@ -126,7 +126,6 @@ class NotificationsFragment : Fragment() {
         binding.edReview.setText("")
     }
 
-
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
