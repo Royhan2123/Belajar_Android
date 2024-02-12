@@ -3,7 +3,7 @@ package com.example.belajarbottomnavigation
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
 import com.google.gson.annotations.SerializedName
 
-data class RestaurantResponse(
+data class PostReviewResponse(
     @field: SerializedName("customerReviews")
     val customerReviewsItem: List<CustomerReviewsItem>,
 
