@@ -11,6 +11,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiServices {
+
     @GET("detail/{id}")
     fun getRestaurant(
         @Path("id") id : String
@@ -24,4 +25,5 @@ interface ApiServices {
         @Field("name") name :String,
         @Field("review") review :String,
     ) : Call<PostReviewResponse>
+
 }
