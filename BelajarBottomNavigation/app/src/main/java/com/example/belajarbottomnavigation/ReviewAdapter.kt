@@ -2,34 +2,35 @@ package com.example.belajarbottomnavigation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.belajarbottomnavigation.adapter.ListViewAdapter
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
 import com.example.belajarbottomnavigation.databinding.ItemReviewBinding
 
-class ReviewAdapter : ListAdapter<CustomerReviewsItem,ReviewAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    class MyViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
+class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>(DIFF_CALLBACK) {
+
+    class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(review:CustomerReviewsItem){
-            binding.tvItem.text = "${review.review}\n - ${review.name}"
+        fun bind(review: CustomerReviewsItem) {
+            binding.tvItem.text = "${review.review} - ${review.name}"
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-      val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return MyViewHolder(binding)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = ItemReviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = getItem(position)
         holder.bind(review)
     }
+
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CustomerReviewsItem>(){
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CustomerReviewsItem>() {
             override fun areItemsTheSame(
                 oldItem: CustomerReviewsItem,
                 newItem: CustomerReviewsItem
@@ -42,7 +43,6 @@ class ReviewAdapter : ListAdapter<CustomerReviewsItem,ReviewAdapter.MyViewHolder
                 newItem: CustomerReviewsItem
             ): Boolean {
                 return oldItem == newItem
-
             }
 
         }
