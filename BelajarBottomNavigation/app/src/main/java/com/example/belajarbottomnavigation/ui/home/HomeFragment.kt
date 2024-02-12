@@ -7,7 +7,7 @@
     import androidx.fragment.app.Fragment
     import androidx.recyclerview.widget.LinearLayoutManager
     import com.example.belajarbottomnavigation.Hero
-    import com.example.belajarbottomnavigation.ListViewAdapter
+    import com.example.belajarbottomnavigation.adapter.ListViewAdapter
     import com.example.belajarbottomnavigation.R
     import com.example.belajarbottomnavigation.databinding.FragmentHomeBinding
 

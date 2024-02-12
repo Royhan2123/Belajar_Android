@@ -1,4 +1,4 @@
-package com.example.belajarbottomnavigation
+package com.example.belajarbottomnavigation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import org.w3c.dom.Text
+import com.example.belajarbottomnavigation.Hero
+import com.example.belajarbottomnavigation.R
 
 class ListViewAdapter(private val listHero: ArrayList<Hero>) :
     RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
