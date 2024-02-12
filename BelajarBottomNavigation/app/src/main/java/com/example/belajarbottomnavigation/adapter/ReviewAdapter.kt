@@ -1,4 +1,4 @@
-package com.example.belajarbottomnavigation
+package com.example.belajarbottomnavigation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
