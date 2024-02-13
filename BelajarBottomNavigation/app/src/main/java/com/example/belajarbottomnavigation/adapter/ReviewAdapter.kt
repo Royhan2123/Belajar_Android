@@ -9,28 +9,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
 import com.example.belajarbottomnavigation.databinding.ItemReviewBinding
 
+class ReviewAdapter : ListAdapter<CustomerReviewsItem,ReviewAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>(DIFF_CALLBACK) {
-
-    class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(review: CustomerReviewsItem) {
-            binding.tvItem.text = "${review.review} - ${review.name}"
+        fun bind(review:CustomerReviewsItem){
+            binding.tvItem.text = "${review.review}\n - ${review.name}"
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = ItemReviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+       val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val review = getItem(position)
         holder.bind(review)
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CustomerReviewsItem>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CustomerReviewsItem>(){
             override fun areItemsTheSame(
                 oldItem: CustomerReviewsItem,
                 newItem: CustomerReviewsItem
@@ -44,7 +43,6 @@ class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>
             ): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

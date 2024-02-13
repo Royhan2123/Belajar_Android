@@ -1,26 +1,13 @@
 package com.example.belajarbottomnavigation.ui.notifications
 
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.belajarbottomnavigation.PostReviewResponse
-import com.example.belajarbottomnavigation.adapter.ReviewAdapter
-import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
-import com.example.belajarbottomnavigation.data.response.Restaurant
-import com.example.belajarbottomnavigation.data.response.RestaurantResponse
-import com.example.belajarbottomnavigation.data.retrofit.ApiConfig
 import com.example.belajarbottomnavigation.databinding.FragmentNotificationsBinding
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 class NotificationsFragment : Fragment() {
 
@@ -51,86 +38,5 @@ class NotificationsFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        findRestaurant()
-
-        binding.btnSend.setOnClickListener {
-            postReview(binding.edReview.text.toString())
-            val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(it.windowToken, 0)
-        }
-    }
-
-    private fun postReview(review: String) {
-        showLoading(true)
-        val client = ApiConfig.getApiServices().postReview(RESTAURANT_ID,"Royhan",review)
-        client.enqueue(object : Callback<PostReviewResponse> {
-            override fun onResponse(
-                call: Call<PostReviewResponse>,
-                response: Response<PostReviewResponse>
-            ) {
-                showLoading(false)
-                val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null) {
-                    setReviewData(responseBody.customerReviewsItem)
-                } else {
-                    Log.e(TAG,"onFailure:  ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<PostReviewResponse>, t: Throwable) {
-                showLoading(false)
-                Log.e(TAG,"onFailure: ${t.message}")
-            }
-        })
-    }
-
-    private fun findRestaurant() {
-        showLoading(true)
-        val client = ApiConfig.getApiServices().getRestaurant(RESTAURANT_ID)
-        client.enqueue(object : Callback<RestaurantResponse> {
-            override fun onResponse(
-                call: Call<RestaurantResponse>,
-                response: Response<RestaurantResponse>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        responseBody.restaurant?.let { setRestaurantData(it) }
-                        setReviewData(responseBody.restaurant?.customerReviews)
-                    }
-                } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
-                showLoading(false)
-                Log.e(TAG, "onFailure: ${t.message}")
-            }
-        })
-    }
-
-    private fun setRestaurantData(restaurant: Restaurant) {
-        binding.tvTitle.text = restaurant.name
-        binding.tvDescription.text = restaurant.description
-        Glide.with(requireContext())
-            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
-            .into(binding.ivPicture)
-    }
-
-    private fun setReviewData(consumerReviews: List<CustomerReviewsItem?>?) {
-        val adapter = ReviewAdapter()
-        adapter.submitList(consumerReviews)
-        binding.rvReview.adapter = adapter
-        binding.edReview.setText("")
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
     }
 }
