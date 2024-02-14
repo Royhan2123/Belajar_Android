@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         fun getApiServices (): ApiServices {
-            val loggingInterceptor = if (BuildConfig.DEBUG) {
+            val loggingInterceptor = if (BuildConfig.DEBUG){
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
@@ -20,9 +20,9 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("https://restaurant-api.dicoding.dev/")
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             return retrofit.create(ApiServices::class.java)

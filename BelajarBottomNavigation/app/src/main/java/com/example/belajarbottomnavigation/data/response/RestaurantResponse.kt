@@ -14,18 +14,6 @@ data class RestaurantResponse(
 	val message: String? = null
 )
 
-data class CustomerReviewsItem(
-
-	@field:SerializedName("date")
-	val date: String? = null,
-
-	@field:SerializedName("review")
-	val review: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null
-)
-
 data class Restaurant(
 
 	@field:SerializedName("customerReviews")
@@ -45,4 +33,16 @@ data class Restaurant(
 
 	@field:SerializedName("id")
 	val id: String? = null
+)
+
+data class CustomerReviewsItem(
+
+	@field:SerializedName("date")
+	val date: String? = null,
+
+	@field:SerializedName("review")
+	val review: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null
 )
