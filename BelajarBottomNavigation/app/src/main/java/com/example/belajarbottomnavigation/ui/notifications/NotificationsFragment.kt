@@ -27,6 +27,7 @@ class NotificationsFragment : Fragment() {
     companion object {
         private const val TAG = "Notification Fragment"
         private const val RESTAURANT_ID = "uewq1zg2zlskfw1e867"
+        private const val BASE_URL = "https://restaurant-api.dicoding.dev/images/large/"
     }
 
     override fun onCreateView(
@@ -53,6 +54,7 @@ class NotificationsFragment : Fragment() {
 
     private fun findRestaurant(){
         showLoading(true)
+
         val client = ApiConfig.getApiServices().getRestaurant(RESTAURANT_ID)
 
         client.enqueue(object : Callback<RestaurantResponse> {
@@ -60,45 +62,35 @@ class NotificationsFragment : Fragment() {
                 call: Call<RestaurantResponse>,
                 response: Response<RestaurantResponse>
             ) {
-                showLoading(false)
-                if (response.isSuccessful){
-                    val responseBody = response.body()
-
-                    if (responseBody != null ){
-                        responseBody.restaurant?.let { setReviewData(it.customerReviews) }
-                        responseBody.restaurant?.let { setRestaurantData(it) }
-                    }
-                } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
-                }
+                TODO("Not yet implemented")
             }
 
             override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
-             Log.e(TAG,"OnFailure ${t.message}")
+               Log.e(TAG,"onFailure ${t.message}")
             }
-
         })
     }
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+
+    private fun setRestaurant(restaurant: Restaurant) {
+        binding.tvTitle.text = restaurant.name
+        binding.tvDescription.text = restaurant.description
+        Glide.with(requireContext())
+            .load("$BASE_URL/${restaurant.pictureId}")
+            .into(binding.ivPicture)
     }
 
-    private fun setReviewData (consumer: List<CustomerReviewsItem?>?) {
+    private fun setReviewData(consumer:List<CustomerReviewsItem>) {
         val adapter = ReviewAdapter()
         adapter.submitList(consumer)
         binding.rvReview.adapter = adapter
         binding.edReview.setText("")
     }
 
-    private fun setRestaurantData(restaurant: Restaurant){
-        binding.tvTitle.text = restaurant.name
-        binding.tvDescription.text = restaurant.description
-        Glide.with(requireContext())
-            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
-            .into(binding.ivPicture)
+    private fun showLoading(isLoading:Boolean) {
+        if (isLoading){
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }
