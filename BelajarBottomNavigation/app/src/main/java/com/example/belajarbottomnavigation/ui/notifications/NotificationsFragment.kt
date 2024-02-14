@@ -62,7 +62,16 @@ class NotificationsFragment : Fragment() {
                 call: Call<RestaurantResponse>,
                 response: Response<RestaurantResponse>
             ) {
-                TODO("Not yet implemented")
+                showLoading(false)
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if (responseBody != null){
+                        responseBody.restaurant?.let { setRestaurant(it) }
+                        setReviewData(responseBody.restaurant?.customerReviews)
+                    }
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
             }
 
             override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
@@ -79,7 +88,7 @@ class NotificationsFragment : Fragment() {
             .into(binding.ivPicture)
     }
 
-    private fun setReviewData(consumer:List<CustomerReviewsItem>) {
+    private fun setReviewData(consumer: List<CustomerReviewsItem?>?) {
         val adapter = ReviewAdapter()
         adapter.submitList(consumer)
         binding.rvReview.adapter = adapter
