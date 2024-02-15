@@ -24,7 +24,6 @@ class ListViewAdapter(private val listHero: ArrayList<Hero>) :
         return ListViewHolder(view)
 
     }
-
     override fun getItemCount(): Int = listHero.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
