@@ -1,4 +1,4 @@
-package com.example.belajarbottomnavigation
+package com.example.belajarbottomnavigation.data.response
 
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
 import com.google.gson.annotations.SerializedName

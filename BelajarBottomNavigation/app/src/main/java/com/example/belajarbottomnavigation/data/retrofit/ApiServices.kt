@@ -1,5 +1,6 @@
 package com.example.belajarbottomnavigation.data.retrofit
 
+import com.example.belajarbottomnavigation.data.response.PostReviewResponse
 import com.example.belajarbottomnavigation.data.response.RestaurantResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -19,8 +20,8 @@ interface ApiServices {
     @Headers("Authorization: token 12345")
     @POST("review")
     fun postReview(
-        @Field("id") id:String,
-        @Field("error") name : String,
-        @Field("error") review : String,
-    )
+        @Field("id") id: String,
+        @Field("name") name: String,
+        @Field("review") review: String,
+    ) : Call<PostReviewResponse>
 }
