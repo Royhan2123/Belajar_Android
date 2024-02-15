@@ -1,16 +1,19 @@
 package com.example.belajarbottomnavigation.ui.notifications
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.belajarbottomnavigation.adapter.ReviewAdapter
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
+import com.example.belajarbottomnavigation.data.response.PostReviewReponse
 import com.example.belajarbottomnavigation.data.response.Restaurant
 import com.example.belajarbottomnavigation.data.response.RestaurantResponse
 import com.example.belajarbottomnavigation.data.retrofit.ApiConfig
@@ -50,6 +53,35 @@ class NotificationsFragment : Fragment() {
         binding.rvReview.addItemDecoration(itemDecoration)
 
         findRestaurant()
+
+        binding.btnSend.setOnClickListener {
+            postReview(binding.edReview.text.toString())
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken,0)
+        }
+    }
+
+    private fun postReview(review:String) {
+        showLoading(true)
+        val client = ApiConfig.getApiServices().postReview(RESTAURANT_ID, "Royhan", review)
+        client.enqueue(object : Callback<PostReviewReponse> {
+            override fun onResponse(
+                call: Call<PostReviewReponse>,
+                response: Response<PostReviewReponse>
+            ) {
+                showLoading(false)
+                val responseBody = response.body()
+                if (response.isSuccessful && responseBody != null) {
+                    reviewData(responseBody.customerReviewsItem)
+                } else {
+                    Log.e(TAG,"OnFailure ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<PostReviewReponse>, t: Throwable) {
+                Log.e(TAG,"OnFailure ${t.message}")
+            }
+        })
     }
 
     private fun findRestaurant(){
