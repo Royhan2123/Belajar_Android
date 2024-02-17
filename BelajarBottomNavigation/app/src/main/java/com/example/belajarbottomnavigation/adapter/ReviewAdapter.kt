@@ -9,22 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
 import com.example.belajarbottomnavigation.databinding.ItemReviewBinding
 
-class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>(DIFF_CALLBACK) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val review = getItem(position)
-        holder.bind(review)
-    }
-
-    class ViewHolder(private val binding: ItemReviewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+class ReviewAdapter : ListAdapter<CustomerReviewsItem,ReviewAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    class MyViewHolder(val binding:ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(review: CustomerReviewsItem) {
+        fun bind(review:CustomerReviewsItem) {
             binding.tvItem.text = "${review.review}\n - ${review.name}"
         }
     }
@@ -45,5 +33,15 @@ class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>
                 return oldItem == newItem
             }
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return MyViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val review = getItem(position)
+        holder.bind(review)
     }
 }

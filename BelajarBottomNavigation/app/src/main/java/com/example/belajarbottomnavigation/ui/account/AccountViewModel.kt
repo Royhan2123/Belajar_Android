@@ -1,11 +1,31 @@
 package com.example.belajarbottomnavigation.ui.account
 
+import android.os.SystemClock
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.Timer
+import java.util.TimerTask
 
 class AccountViewModel : ViewModel() {
-    private var result = 0
+    companion object {
+        private const val ONE_SECOND = 1000
+    }
 
-    fun calculate(width:String,height:String,length:String) {
-        result = width.toInt() * height.toInt() * length.toInt()
+    private val mInitialTime = SystemClock.elapsedRealtime()
+    private val mElapsedTime = MutableLiveData<Long?>()
+
+    init {
+        val timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask(){
+            override fun run() {
+                val newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000
+                mElapsedTime.postValue(newValue)
+            }
+        }, ONE_SECOND.toLong(), ONE_SECOND.toLong())
+    }
+
+    fun getElapsedTime(): LiveData<Long?> {
+        return mElapsedTime
     }
 }

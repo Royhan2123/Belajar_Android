@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.belajarbottomnavigation.adapter.ReviewAdapter
 import com.example.belajarbottomnavigation.data.response.CustomerReviewsItem
-import com.example.belajarbottomnavigation.data.response.PostReviewReponse
+import com.example.belajarbottomnavigation.data.response.PostViewResponse
 import com.example.belajarbottomnavigation.data.response.Restaurant
 import com.example.belajarbottomnavigation.data.response.RestaurantResponse
 import com.example.belajarbottomnavigation.data.retrofit.ApiConfig
@@ -56,36 +56,39 @@ class NotificationsFragment : Fragment() {
 
         binding.btnSend.setOnClickListener {
             postReview(binding.edReview.text.toString())
+
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken,0)
         }
     }
 
-    private fun postReview(review:String) {
+    private fun postReview(review:String){
         showLoading(true)
-        val client = ApiConfig.getApiServices().postReview(RESTAURANT_ID, "Royhan", review)
-        client.enqueue(object : Callback<PostReviewReponse> {
+        val client = ApiConfig.getApiServices().postReview(RESTAURANT_ID,"Royhan",review)
+
+        client.enqueue(object : Callback<PostViewResponse> {
             override fun onResponse(
-                call: Call<PostReviewReponse>,
-                response: Response<PostReviewReponse>
+                call: Call<PostViewResponse>,
+                response: Response<PostViewResponse>
             ) {
                 showLoading(false)
                 val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null) {
-                    reviewData(responseBody.customerReviewsItem)
-                } else {
-                    Log.e(TAG,"OnFailure ${response.message()}")
-                }
+               if (response.isSuccessful && responseBody != null){
+                   setReviewData(responseBody.customerReviewsItem)
+               } else {
+                   Log.e(TAG,"On Failure ${response.message()}")
+               }
             }
 
-            override fun onFailure(call: Call<PostReviewReponse>, t: Throwable) {
-                Log.e(TAG,"OnFailure ${t.message}")
+            override fun onFailure(call: Call<PostViewResponse>, t: Throwable) {
+               Log.e(TAG,"OnFailure ${t.message}")
             }
         })
     }
 
     private fun findRestaurant(){
         showLoading(true)
+
         val client = ApiConfig.getApiServices().getRestaurant(RESTAURANT_ID)
 
         client.enqueue(object : Callback<RestaurantResponse> {
@@ -98,15 +101,13 @@ class NotificationsFragment : Fragment() {
                     val responseBody = response.body()
                     if (responseBody != null) {
                         responseBody.restaurant?.let { setRestaurant(it) }
-                        reviewData(responseBody.restaurant?.customerReviews)
-                    } else {
-                        Log.e(TAG,"OnFailure ${response.message()}")
+                        setReviewData(responseBody.restaurant?.customerReviews)
                     }
                 }
             }
 
             override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
-               Log.e(TAG,"OnFailure ${t.message}")
+              Log.e(TAG,"OnFailure ${t.message}")
             }
         })
     }
@@ -119,14 +120,15 @@ class NotificationsFragment : Fragment() {
             .into(binding.ivPicture)
     }
 
-    private fun reviewData(consumer: List<CustomerReviewsItem?>?) {
+    private fun setReviewData(consumer: List<CustomerReviewsItem?>?){
         val adapter = ReviewAdapter()
         binding.rvReview.adapter = adapter
         adapter.submitList(consumer)
         binding.edReview.setText("")
     }
+
     private fun showLoading(isLoading:Boolean) {
-        if (isLoading){
+        if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
