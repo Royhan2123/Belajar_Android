@@ -15,6 +15,10 @@
         android:theme="@style/Theme.BelajarBottomNavigation"
         tools:targetApi="31">
         <activity
+            android:name=".ui.account.Account"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
             android:name=".ListQuotesActivity"
             android:exported="false" />
         <activity
