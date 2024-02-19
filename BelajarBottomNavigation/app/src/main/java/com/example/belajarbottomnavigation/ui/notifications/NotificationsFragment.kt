@@ -55,7 +55,7 @@ class NotificationsFragment : Fragment() {
         binding.rvReview.addItemDecoration(itemDecoration)
 
         binding.btnSend.setOnClickListener {
-         notificationViewModel.postReview(binding.edReview.text.toString())
+
             val imm =
                 requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
@@ -66,17 +66,7 @@ class NotificationsFragment : Fragment() {
             ViewModelProvider.NewInstanceFactory()
         )[NotificationsViewModel::class.java]
 
-        notificationViewModel.listReview.observe(this){consumerReviews ->
-            setReviewData(consumerReviews)
-        }
 
-        notificationViewModel.isLoading.observe(this){
-            showLoading(it)
-        }
-
-        notificationViewModel.restaurant.observe(this){ restaurant ->
-            setRestaurant(restaurant)
-        }
     }
 
     private fun setRestaurant(restaurant: Restaurant) {
