@@ -1,5 +1,6 @@
 package com.example.belajarbottomnavigation.ui.notifications
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -26,10 +28,9 @@ class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var notificationViewModel: NotificationsViewModel
 
     companion object {
-        private const val TAG = "Notification Fragment"
-        private const val RESTAURANT_ID = "uewq1zg2zlskfw1e867"
         private const val BASE_URL = "https://restaurant-api.dicoding.dev/images/large/"
     }
 
@@ -42,6 +43,7 @@ class NotificationsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,64 +54,29 @@ class NotificationsFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        findRestaurant()
-
         binding.btnSend.setOnClickListener {
-            postReview(binding.edReview.text.toString())
-
-            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken,0)
+         notificationViewModel.postReview(binding.edReview.text.toString())
+            val imm =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
-    }
 
-    private fun postReview(review:String){
-        showLoading(true)
-        val client = ApiConfig.getApiServices().postReview(RESTAURANT_ID,"Royhan",review)
+        notificationViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[NotificationsViewModel::class.java]
 
-        client.enqueue(object : Callback<PostViewResponse> {
-            override fun onResponse(
-                call: Call<PostViewResponse>,
-                response: Response<PostViewResponse>
-            ) {
-                showLoading(false)
-                val responseBody = response.body()
-               if (response.isSuccessful && responseBody != null){
-                   setReviewData(responseBody.customerReviewsItem)
-               } else {
-                   Log.e(TAG,"On Failure ${response.message()}")
-               }
-            }
+        notificationViewModel.listReview.observe(this){consumerReviews ->
+            setReviewData(consumerReviews)
+        }
 
-            override fun onFailure(call: Call<PostViewResponse>, t: Throwable) {
-               Log.e(TAG,"OnFailure ${t.message}")
-            }
-        })
-    }
+        notificationViewModel.isLoading.observe(this){
+            showLoading(it)
+        }
 
-    private fun findRestaurant(){
-        showLoading(true)
-
-        val client = ApiConfig.getApiServices().getRestaurant(RESTAURANT_ID)
-
-        client.enqueue(object : Callback<RestaurantResponse> {
-            override fun onResponse(
-                call: Call<RestaurantResponse>,
-                response: Response<RestaurantResponse>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        responseBody.restaurant?.let { setRestaurant(it) }
-                        setReviewData(responseBody.restaurant?.customerReviews)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
-              Log.e(TAG,"OnFailure ${t.message}")
-            }
-        })
+        notificationViewModel.restaurant.observe(this){ restaurant ->
+            setRestaurant(restaurant)
+        }
     }
 
     private fun setRestaurant(restaurant: Restaurant) {
@@ -120,14 +87,14 @@ class NotificationsFragment : Fragment() {
             .into(binding.ivPicture)
     }
 
-    private fun setReviewData(consumer: List<CustomerReviewsItem?>?){
+    private fun setReviewData(consumer: List<CustomerReviewsItem?>?) {
         val adapter = ReviewAdapter()
         binding.rvReview.adapter = adapter
         adapter.submitList(consumer)
         binding.edReview.setText("")
     }
 
-    private fun showLoading(isLoading:Boolean) {
+    private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
         } else {
